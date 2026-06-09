@@ -1,391 +1,2125 @@
-villa-list.html 
 <!DOCTYPE html>
 <html lang="en">
+
+<!-- Mirrored from www.villacatalogues.com/villa-list by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Apr 2026 12:56:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Villa Collection | Blossom Stay</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,700&family=Inter:wght@400;500;600;700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
-        
-        /* Forced Dark Theme on Body */
-        body { font-family: 'Inter', sans-serif; background-color: #111111; color: white; }
-        .serif { font-family: 'Playfair Display', serif; }
-        .font-body { font-family: 'Montserrat', sans-serif; }
-        
-        /* Ensures dropdown options are readable */
-        option {
-            color: black;
-            background: white;
-        }
-    </style>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="">
+<meta name="theme-color" content="#e33324">
+<meta name="description" content="Luxury Villas for Sale">
+<meta name="keywords" content="luxury villas, villas for sale, villas for rent, private pool villa, modern villa, beach villa, investment villa, family villa, dream villa, villa with garden, premium villa">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luxury Villa For Rent 1 to 12 BHK Option Available</title>
+
+<!--  Favicon -->
+<link rel="shortcut icon" href="public/website/assets/images/favicon.html">
+
+<!-- CSS -->
+<link rel="stylesheet" href="public/website/assets/css/stylesheet.css">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&amp;display=swap" rel="stylesheet">  
+<link rel="stylesheet" href="../cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+<style>
+body, html {
+    overflow-x: hidden; /* Horizontal scroll ko rokne ke liye */
+    width: 100%;
+}
+
+/* ===== HEADER SEARCH FIX ===== */
+.header-search-form {
+    display: flex;
+    align-items: stretch;
+}
+
+.header-search-input {
+    height: 44px !important;
+    line-height: 44px !important;
+    width: 230px;
+    padding: 0 15px;
+    border: 1px solid #ddd;
+    border-right: 0;
+    border-radius: 6px 0 0 6px;
+}
+
+.header-search-btn {
+    height: 44px !important;
+    width: 48px;
+    border: 1px solid #2c335d;
+    background: #2c335d;
+    color: #fff;
+    border-radius: 0 6px 6px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== VILLA CARD DESIGN IMPROVED ===== */
+.villa-card {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.villa-card:hover {
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    transform: translateY(-6px) scale(1.03);
+}
+
+.villa-card a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+}
+
+.villa-image img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+    transition: transform 0.4s ease;
+}
+
+.villa-card:hover .villa-image img {
+    transform: scale(1.05);
+}
+
+.villa-content {
+    padding: 18px 20px;
+    background-color: #fafafa;
+    border-top: 1px solid #eee;
+    text-align: left; /* yaha start align */
+}
+
+.villa-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2c335d;
+    margin-bottom: 6px; /* thoda kam */
+    letter-spacing: 0.03em;
+    text-transform: capitalize;
+}
+
+.villa-location {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 4px;
+    font-style: italic;
+}
+
+.villa-price {
+    font-size: 17px;
+    font-weight: 600;
+    color: #ff6f3c;
+}
+
+
+@media (max-width: 991px) {
+    .villa-image img {
+        height: 180px;
+    }
+}
+
+@media (max-width: 576px) {
+    .villa-image img {
+        height: 150px;
+    }
+}
+
+/* Footer Base */
+.footer-area {
+    background-color: #0a0a0a; /* Dark background */
+    color: #fff;
+    padding: 60px 0 30px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.footer-area a {
+    color: #ccc;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-area a:hover {
+    color: #ff7f50; /* Accent color */
+}
+
+/* Footer Logo */
+.footer-logo {
+    width: 150px;
+    margin-bottom: 15px;
+}
+
+/* Footer About */
+.footer-about {
+    font-size: 14px;
+    color: #aaa;
+}
+
+/* Footer Links */
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links li a::before {
+    content: "•";
+    color: #ff7f50;
+    margin-right: 8px;
+}
+
+/* Footer Gallery */
+.footer-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.footer-gallery img {
+    width: calc(33.333% - 5px);
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.footer-gallery img:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+/* Footer Social */
+.footer-social {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.footer-social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: #1a1a1a;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.footer-social a i {
+    color: #fff;
+    font-size: 16px;
+}
+
+.footer-social a:hover {
+    background: #ff7f50;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    margin-top: 40px;
+    border-top: 1px solid #222;
+    padding-top: 20px;
+    color: #888;
+    font-size: 13px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer-gallery img {
+        width: calc(50% - 5px);
+    }
+
+    .footer-social {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-gallery img {
+        width: 100%;
+    }
+}
+/* ===== MOBILE CARD LAYOUT FIX ===== */
+/* ===== MOBILE CARD LAYOUT FIX ===== */
+@media (max-width: 576px) {
+
+    .villa-card a {
+        display: flex;
+        flex-direction: row; /* left image, right content */
+        align-items: center;
+    }
+
+    /* IMAGE LEFT */
+    .villa-image {
+        order: 1;
+        width: 90px;
+        flex-shrink: 0;
+    }
+
+    .villa-image img {
+        height: 80px;
+        width: 100%;
+        border-radius: 8px;
+        object-fit: cover;
+        border-bottom: none;
+    }
+
+    /* CONTENT RIGHT */
+    .villa-content {
+        order: 2;
+        padding: 12px 14px;
+        flex: 1;
+        background: transparent;
+        border-top: none;
+    }
+
+    .villa-name {
+        font-size: 15px;
+        margin-bottom: 4px;
+    }
+
+    .villa-location {
+        font-size: 13px;
+        margin-bottom: 4px;
+    }
+
+    .villa-price {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .villa-card:hover {
+        transform: none; /* mobile me jump remove */
+    }
+}
+
+.share-now-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin: -15px 0 10px 0; /* upar niche gap adjust */
+}
+
+.share-now-bar button {
+    background: #25D366;
+    color: #fff;
+    border: none;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.share-now-bar button:hover {
+    background: #1ebe5d;
+}
+
+.share-now-bar i {
+    font-size: 14px;
+}
+
+.share-icon-btn {
+    background: #2c335d;
+    color: #fff;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-left: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.share-icon-btn:hover {
+    background: #1f2445;
+}
+
+.share-icon-btn i {
+    font-size: 14px;
+}
+
+
+
+
+</style>
 </head>
-<body class="bg-[#111111] overflow-x-hidden">
 
-    <nav class="bg-[#0a0a0a] w-full z-40 px-4 py-6 border-b border-gray-800">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="index.html" class="serif text-xl md:text-2xl font-bold tracking-widest uppercase text-[#d4af37]">
-                Blossom Stay
-            </a>
-            <div class="hidden md:flex gap-8 text-xs font-semibold uppercase tracking-widest text-white">
-                <a href="index.html" class="hover:text-[#d4af37] transition">Home</a>
-                <a href="about-us.html" class="hover:text-[#d4af37] transition">About Us</a>
-                <a href="contact-us.html" class="hover:text-[#d4af37] transition">Contact</a>
-            </div>
-            <button class="md:hidden text-[#d4af37]"><i class="fa-solid fa-bars text-2xl"></i></button>
-        </div>
-    </nav>
+<body>
 
-    <section class="bg-[#111111] pt-16 pb-8 border-b border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <h5 class="text-[#d4af37] text-xs font-bold tracking-widest uppercase mb-4">The Collection</h5>
-            <h1 class="serif text-4xl md:text-6xl font-normal text-white leading-tight">Curated Luxury Villas</h1>
-            <p id="search-status" class="text-gray-400 mt-6 max-w-xl mx-auto text-sm leading-relaxed">Browsing all exclusive properties.</p>
-        </div>
-    </section>
+<!-- Header -->
+<header id="header-container" class="fullwidth"> 
+    <!-- Header -->
+    <div id="header">
+      <div class="container"> 
+        <div class="left-side"> 
+         <div id="logo">
+            <a href="index.html"
+               style="
+                   font-weight:bold;
+                   color:#000;
+                   font-size:16px;
+                   text-decoration:none;
+                   white-space:nowrap;
+                   display:inline-block;
+               ">
+                VILLA CATALOGUE
+            </a>
+        </div>
 
-    <main class="max-w-7xl mx-auto px-4 py-12">
-        
-        <div class="bg-[#1a1a1a] border border-gray-800 rounded-2xl p-6 mb-12 flex flex-col md:flex-row gap-6 items-end shadow-xl">
-            <div class="flex-1 flex flex-col w-full">
-                <label class="text-[#d4af37] text-[10px] font-bold tracking-widest uppercase mb-2">Location</label>
-                <select id="page-loc-filter" class="w-full bg-transparent border-b border-white/30 text-white pb-2 text-sm focus:outline-none focus:border-[#d4af37] cursor-pointer appearance-none">
-                    <option value="All">All Locations</option>
-                    <option value="Karjat">Karjat</option>
-                    <option value="Lonavala">Lonavala</option>
-                    <option value="Pawna">Pawna Lake</option>
-                    <option value="Alibaug">Alibaug</option>
-                    <option value="Khandala">Khandala</option>
-                    <option value="Igatpuri">Igatpuri</option>
-                    <option value="Panchgani">Panchgani</option>
-                    <option value="Mahableshwar">Mahableshwar</option>
-                </select>
-            </div>
-            
-            <div class="flex-1 flex flex-col w-full">
-                <label class="text-[#d4af37] text-[10px] font-bold tracking-widest uppercase mb-2">Bedrooms</label>
-                <select id="page-bhk-filter" class="w-full bg-transparent border-b border-white/30 text-white pb-2 text-sm focus:outline-none focus:border-[#d4af37] cursor-pointer appearance-none">
-                    <option value="All">Any Size</option>
-                    <option value="1">1 BHK</option>
-                    <option value="2">2 BHK</option>
-                    <option value="3">3 BHK</option>
-                    <option value="4">4 BHK</option>
-                    <option value="5">5 BHK</option>
-                    <option value="6">6 BHK</option>
-                    <option value="7">7 BHK</option>
-                    <option value="8">8 BHK</option>
-                    <option value="10">10 BHK</option>
-                    <option value="12">12 BHK</option>
-                </select>
-            </div>
 
-            <div class="flex-1 flex flex-col w-full relative">
-                <label class="text-[#d4af37] text-[10px] font-bold tracking-widest uppercase mb-2">Search</label>
-                <input type="text" id="page-search-filter" placeholder="e.g. Glass House" class="w-full bg-transparent border-b border-white/30 text-white pb-2 text-sm focus:outline-none focus:border-[#d4af37] placeholder-gray-600">
-                <i class="fa-solid fa-magnifying-glass absolute right-2 bottom-3 text-gray-500 text-xs"></i>
-            </div>
+          <div class="mmenu-trigger">
+            <button class="hamburger hamburger--collapse" type="button"> <span class="hamburger-box"> <span class="hamburger-inner"></span> </span> </button>
+          </div>
+		  <!-- Main Navigation -->
+          <nav id="navigation" class="style-1">
+            <ul id="responsive">
+              <li><a class="current" href="#">Home</a>
+              </li>
+              <li><a href="about-us.html">About Us</a>
+              </li>
+              <!--<li><a href="https://www.villacatalogues.com/villa-list">Villa List</a>-->
+			  </li>
+              <!--<li><a href="https://www.villacatalogues.com/our-gallery">Gallery</a>-->
+              <!--</li>-->
+			  <li><a href="contact-us.html">Contact</a></li>
+            </ul>
+          </nav>
+          <div class="clearfix"></div>
+        </div>
+        <div class="right-side">
+    <div class="header-widget">
+    <form method="GET" action="https://www.villacatalogues.com/" class="header-search-form" id="headerSearchForm">
 
-            <div class="w-full md:w-auto">
-                <button id="clear-page-filters" class="w-full md:w-auto border border-gray-600 text-gray-400 hover:text-white hover:border-white px-6 py-2 rounded text-xs font-bold tracking-widest uppercase transition duration-300">
-                    Clear
-                </button>
-            </div>
-        </div>
+        <!-- Search input + button -->
+        <div class="search-wrapper">
+            <input type="text" name="search" class="header-search-input search-box" placeholder="Search By Name,Location..."
+                value="">
+            <button type="submit" class="header-search-btn">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" id="villa-grid">
-            </div>
+        <!-- Filters -->
+        <div class="filters-wrapper">
+            <select name="bhk" class="header-search-input" id="bhkFilter">
+                <option value="">All BHK</option>
+                                    <option value="1" >
+                        1 BHK
+                    </option>
+                                    <option value="2" >
+                        2 BHK
+                    </option>
+                                    <option value="3" >
+                        3 BHK
+                    </option>
+                                    <option value="4" >
+                        4 BHK
+                    </option>
+                                    <option value="5" >
+                        5 BHK
+                    </option>
+                                    <option value="6" >
+                        6 BHK
+                    </option>
+                                    <option value="7" >
+                        7 BHK
+                    </option>
+                                    <option value="8" >
+                        8 BHK
+                    </option>
+                                    <option value="9" >
+                        9 BHK
+                    </option>
+                                    <option value="10" >
+                        10 BHK
+                    </option>
+                                    <option value="11" >
+                        11 BHK
+                    </option>
+                                    <option value="12" >
+                        12 BHK
+                    </option>
+                            </select>
 
-        <div id="no-villas" class="hidden text-center py-16">
-            <i class="fa-solid fa-house-chimney-slash text-6xl text-gray-700 mb-6"></i>
-            <h3 class="serif text-2xl text-white">No villas match your exact search.</h3>
-            <p class="text-gray-500 mt-4 text-sm max-w-md mx-auto">Try clearing your filters to see more properties.</p>
-        </div>
-    </main>
+            <select name="location" class="header-search-input" id="locationFilter">
+                <option value="">All Locations</option>
+                                    <option value="Karjat" >
+                        Karjat
+                    </option>
+                                    <option value="Lonavala" >
+                        Lonavala
+                    </option>
+                                    <option value="PAWNA" >
+                        PAWNA
+                    </option>
+                                    <option value="ALIBAUG" >
+                        ALIBAUG
+                    </option>
+                                    <option value="KHANDALA" >
+                        KHANDALA
+                    </option>
+                                    <option value="IGATPURI" >
+                        IGATPURI
+                    </option>
+                                    <option value="PANCHGANI" >
+                        PANCHGANI
+                    </option>
+                                    <option value="MAHABLESHWAR" >
+                        MAHABLESHWAR
+                    </option>
+                                    <option value="LONAVALA/PAWNA" >
+                        LONAVALA/PAWNA
+                    </option>
+                                    <option value="All location" >
+                        All location
+                    </option>
+                            </select>
+        </div>
+    </form>
+</div>
 
-    <a href="https://wa.me/918806200139" target="_blank" class="fixed bottom-6 right-6 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300 z-50">
-        <i class="fa-brands fa-whatsapp text-3xl"></i>
-    </a>
+</div>
+      </div>
+    </div>
+  </header>
+  
+  
+  <style>
+  
+  @media (max-width: 768px) {
 
-    <footer class="bg-[#0a0a0a] text-gray-400 py-16 border-t border-gray-800 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div class="col-span-1 md:col-span-1">
-                <div class="serif text-2xl text-[#d4af37] mb-4">Blossom Stay</div>
-                <p class="text-sm leading-relaxed mb-6 text-gray-400">Curated luxury villas across India. Experience unmatched elegance and bespoke hospitality for your perfect getaway.</p>
-                <div class="flex gap-4">
-                    <a href="#" class="text-gray-400 hover:text-[#d4af37] transition"><i class="fa-brands fa-instagram text-xl"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-[#d4af37] transition"><i class="fa-brands fa-facebook text-xl"></i></a>
-                </div>
-            </div>
-            <div>
-                <h4 class="text-white font-bold tracking-widest uppercase text-sm mb-4">Quick Links</h4>
-                <ul class="space-y-3 text-sm">
-                    <li><a href="villa-list.html" class="hover:text-[#d4af37] transition">Our Villas</a></li>
-                    <li><a href="about-us.html" class="hover:text-[#d4af37] transition">About Us</a></li>
-                    <li><a href="contact-us.html" class="hover:text-[#d4af37] transition">Contact</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-white font-bold tracking-widest uppercase text-sm mb-4">Destinations</h4>
-                <ul class="space-y-3 text-sm">
-                    <li><a href="villa-list.html?loc=Lonavala" class="hover:text-[#d4af37] transition">Lonavala</a></li>
-                    <li><a href="villa-list.html?loc=Karjat" class="hover:text-[#d4af37] transition">Karjat</a></li>
-                    <li><a href="villa-list.html?loc=Alibaug" class="hover:text-[#d4af37] transition">Alibaug</a></li>
-                    <li><a href="villa-list.html?loc=Pawna" class="hover:text-[#d4af37] transition">Pawna Lake</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-white font-bold tracking-widest uppercase text-sm mb-4">Contact Us</h4>
-                <ul class="space-y-4 text-sm">
-                    <li class="flex items-start gap-3">
-                        <i class="fa-solid fa-phone text-[#d4af37] mt-1"></i>
-                        <span>+91 8806200139<br><span class="text-xs text-gray-500">24/7 Concierge</span></span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <i class="fa-solid fa-envelope text-[#d4af37] mt-1"></i>
-                        <span class="hover:text-[#d4af37] cursor-pointer transition">blossomstay@proton.me</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto px-4 mt-12 pt-8 border-t border-gray-800 text-xs text-center flex flex-col md:flex-row justify-between items-center">
-            <p>&copy; 2026 Blossom Stay. All rights reserved.</p>
-            <div class="space-x-4 mt-4 md:mt-0">
-                <a href="#" class="hover:text-white transition">Privacy Policy</a>
-                <a href="#" class="hover:text-white transition">Terms of Service</a>
-            </div>
-        </div>
-    </footer>
+    /* 🔴 RESET (taaki purana CSS interfere na kare) */
+    .header-search-input,
+    .filters-wrapper select {
+        all: unset;
+        box-sizing: border-box;
+    }
 
-    <script>
-        // FULL VILLA DATABASE
-        const villas = [
-            // 1 BHK
-            { bhk: 1, title: "1 BEDROOM KESARI VILLA", loc: "KARJAT", priceWd: "2500", priceWe: "5500", img: "public/villa/697deba4b2c24.jpg", url: "villa-detail/25.html" },
-            { bhk: 1, title: "1 BEDROOM HIWARE VILLA", loc: "KARJAT", priceWd: "2500", priceWe: "5500", img: "public/villa/697c496de583c.jpg", url: "villa-detail/24.html" },
-            { bhk: 1, title: "1 BEDROOM SOMNA CASA", loc: "KARJAT", priceWd: "3000", priceWe: "6000", img: "public/villa/697de6820ce6d.jpg", url: "villa-detail/16.html" },
-            
-            // 2 BHK
-            { bhk: 2, title: "2 BHK SHREE FARMS", loc: "KARJAT", priceWd: "5500", priceWe: "9500", img: "public/villa/697dec1f0c65d.jpg", url: "villa-detail/35.html" },
-            { bhk: 2, title: "2 BHK SMOOKEY VILLA", loc: "IGATPURI", priceWd: "5000", priceWe: "8000", img: "public/villa/697a3b2fcbbb5.jpg", url: "villa-detail/34.html" },
-            { bhk: 2, title: "2 BHK ANVI VILLA", loc: "ALIBAUG", priceWd: "5000", priceWe: "9000", img: "public/villa/697a399c07787.jpg", url: "villa-detail/33.html" },
-            { bhk: 2, title: "2 BHK ZINGO VALLEY", loc: "IGATPURI", priceWd: "5000", priceWe: "9000", img: "public/villa/697a38d173697.jpg", url: "villa-detail/32.html" },
-            { bhk: 2, title: "2 BHK DUNED DELIGHT", loc: "KARJAT", priceWd: "5500", priceWe: "9000", img: "public/villa/697a373e58b23.jpg", url: "villa-detail/31.html" },
-            { bhk: 2, title: "2 BHK SAPPHIRE SEASCAPE", loc: "KHANDALA", priceWd: "5500", priceWe: "9000", img: "public/villa/697a3530a1467.jpg", url: "villa-detail/30.html" },
-            { bhk: 2, title: "2 BHK TOPICALTIDE", loc: "LONAVALA", priceWd: "5500", priceWe: "9000", img: "public/villa/697a327acb00a.jpg", url: "villa-detail/28.html" },
-            { bhk: 2, title: "2 BHK RANGILA VILLA", loc: "ALIBAUG", priceWd: "5000", priceWe: "9000", img: "public/villa/697a1c1c93270.jpg", url: "villa-detail/27.html" },
-            { bhk: 2, title: "2 BHK AVION HOLIDAY", loc: "KARJAT", priceWd: "5000", priceWe: "9000", img: "public/villa/697a0a5e6bb6c.jpg", url: "villa-detail/26.html" },
-            { bhk: 2, title: "2 BHK ROYAL CRYSTAL", loc: "LONAVALA", priceWd: "5500", priceWe: "9500", img: "public/villa/6979c02550ae8.jpg", url: "villa-detail/17.html" },
+    /* 🔹 HEADER STACK */
+    #header .container {
+        display: flex !important;
+        flex-direction: column !important;
+    }
 
-            // 3 BHK
-            { bhk: 3, title: "3 BHK THAKWAD NIWAS", loc: "KARJAT", priceWd: "9000", priceWe: "15000", img: "public/villa/697f49a5ef5eb.jpg", url: "villa-detail/84.html" },
-            { bhk: 3, title: "3 BHK THE LAST RESORT", loc: "MAHABLESHWAR", priceWd: "8000", priceWe: "12000", img: "public/villa/697af073bd369.jpg", url: "villa-detail/45.html" },
-            { bhk: 3, title: "3 BHK SUNFLOWER", loc: "LONAVALA", priceWd: "9000", priceWe: "16000", img: "public/villa/697ae8f5593c5.jpg", url: "villa-detail/44.html" },
-            { bhk: 3, title: "3 BHK VIRAJ DHULE", loc: "LONAVALA", priceWd: "9000", priceWe: "16000", img: "public/villa/697fc6bb1dcb7.jpg", url: "villa-detail/43.html" },
-            { bhk: 3, title: "3 BHK THE LAKE HOUSE", loc: "LONAVALA", priceWd: "7000", priceWe: "10000", img: "public/villa/697ae6e82cc9d.jpg", url: "villa-detail/42.html" },
-            { bhk: 3, title: "3 BHK VILLA OASIS", loc: "KARJAT", priceWd: "8500", priceWe: "15000", img: "public/villa/697a520e2f933.jpg", url: "villa-detail/41.html" },
-            { bhk: 3, title: "3 BHK MERITASADORE", loc: "PANCHGANI", priceWd: "9000", priceWe: "14000", img: "public/villa/697a5066c4081.jpg", url: "villa-detail/40.html" },
-            { bhk: 3, title: "3 BHK CLIFF SIDEAWAY", loc: "PANCHGANI", priceWd: "9000", priceWe: "14000", img: "public/villa/697a41b380265.jpg", url: "villa-detail/39.html" },
-            { bhk: 3, title: "3 BHK PRINCESS VILLA", loc: "LONAVALA / PAWNA", priceWd: "12000", priceWe: "18000", img: "public/villa/697f1770d98ac.jpg", url: "villa-detail/18.html" },
+    .right-side,
+    .header-widget {
+        width: 100% !important;
+    }
 
-            // 4 BHK
-            { bhk: 4, title: "4 BHK VIRA FARM", loc: "KARJAT", priceWd: "12000", priceWe: "24000", img: "public/villa/697f1311863a4.jpg", url: "villa-detail/54.html" },
-            { bhk: 4, title: "4 BHK ALING MASK", loc: "ALIBAUG", priceWd: "10000", priceWe: "18000", img: "public/villa/697aff08d532e.jpg", url: "villa-detail/53.html" },
-            { bhk: 4, title: "4 BHK DECK", loc: "PANCHGANI", priceWd: "16500", priceWe: "21000", img: "public/villa/697afe21e0fd0.jpg", url: "villa-detail/52.html" },
-            { bhk: 4, title: "4 BHK BORN COTTAGE", loc: "LONAVALA", priceWd: "16000", priceWe: "21000", img: "public/villa/697afc6b2ef8e.jpg", url: "villa-detail/51.html" },
-            { bhk: 4, title: "4 BHK NOVOTEL IMAGICA", loc: "PANCHGANI", priceWd: "12000", priceWe: "18000", img: "public/villa/697af8362bf38.jpg", url: "villa-detail/50.html" },
-            { bhk: 4, title: "4 BHK IGNO CASA", loc: "IGATPURI", priceWd: "9500", priceWe: "16000", img: "public/villa/697af64a65de4.jpg", url: "villa-detail/49.html" },
-            { bhk: 4, title: "4 BHK CORN VILLA", loc: "ALIBAUG", priceWd: "10000", priceWe: "18000", img: "public/villa/697af5afbb342.jpg", url: "villa-detail/48.html" },
-            { bhk: 4, title: "4 BHK PUSHKAR NALAWADE", loc: "LONAVALA", priceWd: "10000", priceWe: "18000", img: "public/villa/697f3d0b5d7f4.jpg", url: "villa-detail/47.html" },
-            { bhk: 4, title: "4 BHK CRAZY BELL", loc: "KARJAT", priceWd: "10000", priceWe: "18000", img: "public/villa/697af16d591ac.jpg", url: "villa-detail/46.html" },
-            { bhk: 4, title: "4 BHK EARTH FARM", loc: "LONAVALA / PAWNA", priceWd: "15000", priceWe: "22000", img: "public/villa/697f090e0f11d.jpg", url: "villa-detail/19.html" },
+    /* 🔹 SEARCH BAR (EXACT UI) */
+    .search-wrapper {
+        display: flex !important;
+        width: 100% !important;
+        margin-top: 10px !important;
+    }
 
-            // 5 BHK
-            { bhk: 5, title: "5 BHK DREAMWOOD VILLA", loc: "PAWNA / LONAVALA", priceWd: "18000", priceWe: "28000", img: "public/villa/69c3f8de08ca0.jpg", url: "villa-detail/89.html" },
-            { bhk: 5, title: "5 BHK VILAS SAKHARAM WAGHMARE", loc: "LONAVALA", priceWd: "25000", priceWe: "36000", img: "public/villa/69c3f94f8ce61.jpg", url: "villa-detail/85.html" },
-            { bhk: 5, title: "5 BHK BREEZA BAND", loc: "KARJAT", priceWd: "17000", priceWe: "24000", img: "public/villa/697b3c3b68ef6.jpg", url: "villa-detail/64.html" },
-            { bhk: 5, title: "5 BHK EKAYA FARMS", loc: "LONAVALA / PAWNA", priceWd: "16000", priceWe: "23000", img: "public/villa/697f450899339.jpg", url: "villa-detail/63.html" },
-            { bhk: 5, title: "5 BHK SEWAKET VILLA", loc: "ALIBAUG", priceWd: "14000", priceWe: "22000", img: "public/villa/697b397f37dc0.jpg", url: "villa-detail/62.html" },
-            { bhk: 5, title: "5 BHK SOMNA VILLA", loc: "ALIBAUG", priceWd: "14000", priceWe: "22000", img: "public/villa/697b38d773a32.jpg", url: "villa-detail/61.html" },
-            { bhk: 5, title: "5 BHK DOLCEVITA", loc: "LONAVALA", priceWd: "16000", priceWe: "26000", img: "public/villa/697b370a0a3ef.jpg", url: "villa-detail/60.html" },
-            { bhk: 5, title: "5 BHK BAMBLE VILLA", loc: "IGATPURI", priceWd: "15000", priceWe: "23000", img: "public/villa/697f3a6c6a8ca.jpg", url: "villa-detail/59.html" },
-            { bhk: 5, title: "5 BHK LIGO VILLA", loc: "KARJAT", priceWd: "13000", priceWe: "25000", img: "public/villa/697b3549c3010.jpg", url: "villa-detail/58.html" },
-            { bhk: 5, title: "5 BHK MARHABA VILLA", loc: "MAHABLESHWAR", priceWd: "18000", priceWe: "28000", img: "public/villa/697b3364da2b5.jpg", url: "villa-detail/57.html" },
-            { bhk: 5, title: "5 BHK KAMISAT VILLA", loc: "LONAVALA", priceWd: "13000", priceWe: "25000", img: "public/villa/697b316961de8.jpg", url: "villa-detail/56.html" },
-            { bhk: 5, title: "5 BHK DRIFTWOOD", loc: "PANCHGANI", priceWd: "17000", priceWe: "24000", img: "public/villa/697b2f61a1b27.jpg", url: "villa-detail/55.html" },
-            { bhk: 5, title: "5 BHK BATCOMB", loc: "KARJAT", priceWd: "18500", priceWe: "28000", img: "public/villa/6979fd053adde.jpg", url: "villa-detail/20.html" },
+    .search-box {
+        width: 100% !important;
+        height: 45px !important;
+        padding: 0 15px !important;
+        border-radius: 25px 0 0 25px !important;
+        border: 1px solid #e5e5e5 !important;
+        font-size: 14px !important;
+        background: #fff !important;
+    }
 
-            // 6 BHK
-            { bhk: 6, title: "6 BHK DUBASH FARM", loc: "MAHABLESHWAR", priceWd: "20000", priceWe: "35000", img: "public/villa/69c3f8c083d18.jpg", url: "villa-detail/88.html" },
-            { bhk: 6, title: "6 BHK GLASS HOUSE", loc: "PAWNA / LONAVALA", priceWd: "1499", priceWe: "1499", isPerPersonOffer: true, img: "public/villa/69c3f90b7e4d3.jpg", url: "villa-detail/87.html" },
-            { bhk: 6, title: "6 BHK PERCHE OFFGRID", loc: "LONAVALA / PAWNA", priceWd: "23000", priceWe: "39000", img: "public/villa/697f084cb5b66.jpg", url: "villa-detail/69.html" },
-            { bhk: 6, title: "6 BHK BHUBTARA", loc: "LONAVALA", priceWd: "22000", priceWe: "39000", img: "public/villa/697f13c93e07b.jpg", url: "villa-detail/68.html" },
-            { bhk: 6, title: "6 BHK LAKDAWALA BUNGALOW", loc: "LONAVALA", priceWd: "20000", priceWe: "38000", img: "public/villa/697f3c2842990.jpg", url: "villa-detail/67.html" },
-            { bhk: 6, title: "6 BHK HOUSEN VILLA", loc: "LONAVALA", priceWd: "19500", priceWe: "28000", img: "public/villa/697c4f67ad930.jpg", url: "villa-detail/66.html" },
-            { bhk: 6, title: "6 BHK BLACK STONE VILLA", loc: "LONAVALA", priceWd: "16500", priceWe: "28500", img: "public/villa/697c4e359d6e4.jpg", url: "villa-detail/65.html" },
-            { bhk: 6, title: "6 BHK MASK STONE", loc: "KARJAT", priceWd: "24000", priceWe: "42000", img: "public/villa/6979fe54aa120.jpg", url: "villa-detail/21.html" },
+    .header-search-btn {
+        width: 55px !important;
+        border-radius: 0 25px 25px 0 !important;
+        background: #2f3e5c !important;
+        color: #fff !important;
+        border: none !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-            // 7 BHK
-            { bhk: 7, title: "7 BHK THE WHITE HELL", loc: "KARJAT", priceWd: "28000", priceWe: "42000", img: "public/villa/69c3f9774c0cb.jpg", url: "villa-detail/83.html" },
-            { bhk: 7, title: "7 BHK JIWA VILLA", loc: "ALIBAUG", priceWd: "20000", priceWe: "32000", img: "public/villa/69c3fa2e60b39.jpg", url: "villa-detail/74.html" },
-            { bhk: 7, title: "7 BHK HARSI VILLA", loc: "LONAVALA", priceWd: "28000", priceWe: "48000", img: "public/villa/697c57abf00cd.jpg", url: "villa-detail/73.html" },
-            { bhk: 7, title: "7 BHK BUDDHA VIHAR", loc: "KARJAT", priceWd: "28000", priceWe: "48000", img: "public/villa/697f0a42523a9.jpg", url: "villa-detail/72.html" },
-            { bhk: 7, title: "7 BHK LUXURY HUT VILLA", loc: "KARJAT", priceWd: "52000", priceWe: "90000", img: "public/villa/697c55c302d4e.jpg", url: "villa-detail/71.html" },
-            { bhk: 7, title: "7 BHK IGRI HORA TURF VILLA", loc: "IGATPURI", priceWd: "19500", priceWe: "39500", img: "public/villa/697c54c757230.jpg", url: "villa-detail/70.html" },
-            { bhk: 7, title: "7 BHK LOHKRA VILLA", loc: "LONAVALA", priceWd: "27000", priceWe: "42000", img: "public/villa/6979ff8579761.url", url: "villa-detail/22.html" },
+    /* 🔹 FILTER PILLS */
+    .filters-wrapper {
+        display: flex !important;
+        justify-content: space-between !important;
+        gap: 12px !important;
+        margin-top: -9px !important;
+    }
 
-            // 8 BHK
-            { bhk: 8, title: "8 BHK MAHABIR VILLA", loc: "KARJAT", priceWd: "28000", priceWe: "48000", img: "public/villa/69c3f9d0b9386.jpg", url: "villa-detail/78.html" },
-            { bhk: 8, title: "8 BHK HILLJILL VILLA", loc: "IGATPURI", priceWd: "22000", priceWe: "42000", img: "public/villa/697c7db6c753e.jpg", url: "villa-detail/77.html" },
-            { bhk: 8, title: "8 BHK HIRRO VILLA", loc: "ALIBAUG", priceWd: "22000", priceWe: "42000", img: "public/villa/69c3f9f804616.jpg", url: "villa-detail/76.html" },
-            { bhk: 8, title: "8 BHK APRIT VILLA", loc: "LONAVALA", priceWd: "35000", priceWe: "58000", img: "public/villa/69c3fa14a55b2.jpg", url: "villa-detail/75.html" },
-            { bhk: 8, title: "8 BHK SANDHU FARMS", loc: "LONAVALA / PAWNA", priceWd: "35000", priceWe: "58000", img: "public/villa/697f3df10d88c.jpg", url: "villa-detail/23.html" },
+    .filters-wrapper select {
+        width: 48% !important;
+        height: 42px !important;
+        border-radius: 25px !important;
+        padding: 0 38px 0 15px !important;
+        border: none !important;
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        text-align: center !important;
 
-            // 10 BHK
-            { bhk: 10, title: "10 BHK CASA DE KRI", loc: "KARJAT", priceWd: "32000", priceWe: "60000", img: "public/villa/697c8783b280a.jpg", url: "villa-detail/80.html" },
-            { bhk: 10, title: "10 BHK PARIS VILLA", loc: "LONAVALA", priceWd: "32000", priceWe: "60000", img: "public/villa/697c85739690d.jpg", url: "villa-detail/79.html" },
+        background-color: #f3f3f5 !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
 
-            // 12 BHK
-            { bhk: 12, title: "12 BHK ANJIRAM VILLA", loc: "LONAVALA", priceWd: "44000", priceWe: "88000", img: "public/villa/69c3f99b56ef9.jpg", url: "villa-detail/82.html" },
-            { bhk: 12, title: "12 BHK SINGARA VILLA", loc: "KARJAT", priceWd: "44000", priceWe: "88000", img: "public/villa/69d518437cf8f.jpg", url: "villa-detail/81.html" }
-        ];
+        appearance: none !important;
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
 
-        // UI Elements
-        const grid = document.getElementById('villa-grid');
-        const noVillas = document.getElementById('no-villas');
-        const status = document.getElementById('search-status');
-        const pageLocFilter = document.getElementById('page-loc-filter');
-        const pageBhkFilter = document.getElementById('page-bhk-filter');
-        const pageSearchFilter = document.getElementById('page-search-filter');
-        const clearPageFiltersBtn = document.getElementById('clear-page-filters');
+        /* 🔥 FORCE ICON */
+        background-image: url("data:image/svg+xml;utf8,<svg fill='%23888888' height='20' viewBox='0 0 20 20' width='20'><path d='M5 7l5 5 5-5z'/></svg>") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 12px center !important;
+        background-size: 14px !important;
+    }
 
-        // Function to create a luxury card for each villa
-        function createCard(v) {
-            const realId = v.url.replace('villa-detail/', '').replace('.html', '');
-            
-            let priceHtml = `
-                <div class="flex justify-between items-center mb-2">
-                    <span class="text-gray-400 text-[10px] font-bold uppercase tracking-widest">Weekdays</span>
-                    <span class="text-white font-bold text-[14px]">₹${parseFloat(v.priceWd).toLocaleString('en-IN')}${v.isPerPersonOffer ? '<span class="text-[10px] text-gray-500 ml-1">/PP</span>' : ''}</span>
-                </div>
-                <div class="flex justify-between items-center bg-[#d4af37]/10 px-2 py-1 rounded">
-                    <span class="text-[#d4af37] text-[10px] font-bold uppercase tracking-widest">Weekends</span>
-                    <span class="text-[#d4af37] font-bold text-[14px]">₹${parseFloat(v.priceWe).toLocaleString('en-IN')}${v.isPerPersonOffer ? '<span class="text-[10px] text-[#d4af37]/70 ml-1">/PP</span>' : ''}</span>
-                </div>
-            `;
+    /* 🔹 TEXT COLORS (same as image) */
+    #bhkFilter {
+        color: #7a3d3d !important;
+    }
 
-            return `
-                <a href="villa.html?id=${realId}" class="block bg-[#1a1a1a] rounded-2xl overflow-hidden border border-gray-800 shadow-lg hover:shadow-2xl hover:border-[#d4af37]/50 hover:-translate-y-1 transition-all duration-300 h-full flex flex-col group">
-                    <div class="relative h-56 overflow-hidden bg-gray-900">
-                        <img src="${v.img}" onerror="this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=400'" alt="${v.title}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
-                        <div class="absolute top-4 left-4 bg-black/70 backdrop-blur-sm px-3 py-1 rounded text-white text-[10px] font-bold tracking-widest uppercase border border-white/10">
-                            ${v.bhk} BHK
-                        </div>
-                    </div>
-                    <div class="p-5 flex flex-col flex-grow">
-                        <h3 class="font-bold text-white text-[15px] leading-tight mb-3 line-clamp-2">${v.title}</h3>
-                        
-                        <div class="flex items-center gap-2 text-gray-400 text-xs font-semibold mb-4 uppercase tracking-wider">
-                            <i class="fa-solid fa-location-dot text-[#d4af37]"></i> ${v.loc}
-                        </div>
-                        
-                        <div class="flex flex-col mt-auto pt-4 border-t border-gray-800 justify-end">
-                            ${priceHtml}
-                        </div>
-                    </div>
-                </a>
-            `;
-        }
+    #locationFilter {
+        color: #777 !important;
+    }
 
-        // Function to render the grid
-        function displayVillas(data) {
-            grid.innerHTML = '';
-            if (data.length === 0) {
-                noVillas.classList.remove('hidden');
-                grid.classList.add('hidden');
-                return;
-            }
-            noVillas.classList.add('hidden');
-            grid.classList.remove('hidden');
+}
 
-            data.forEach(villa => {
-                grid.innerHTML += createCard(villa);
-            });
-        }
 
-        // Core Filtering Logic
-        function applyFilters() {
-            let filtered = villas;
-            const locVal = pageLocFilter.value;
-            const bhkVal = pageBhkFilter.value;
-            const searchVal = pageSearchFilter.value.toLowerCase();
 
-            // Filter by Location
-            if (locVal && locVal !== 'All') {
-                filtered = filtered.filter(v => v.loc.toLowerCase().includes(locVal.toLowerCase()));
-            }
-            
-            // Filter by BHK
-            if (bhkVal && bhkVal !== 'All') {
-                filtered = filtered.filter(v => v.bhk.toString() === bhkVal);
-            }
+@media (max-width: 768px) {
 
-            // Filter by Search Input
-            if (searchVal) {
-                filtered = filtered.filter(v => v.title.toLowerCase().includes(searchVal) || v.loc.toLowerCase().includes(searchVal));
-            }
+    .mobile-card {
+        border-radius: 14px;
+        padding: 12px;
+        margin-bottom: 14px;
+        background: #fff;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        border: none;
+    }
 
-            // Update UI Grid
-            displayVillas(filtered);
-            
-            // Update Status Text
-            let activeFilters = [];
-            if(locVal !== 'All') activeFilters.push(locVal);
-            if(bhkVal !== 'All') activeFilters.push(`${bhkVal} BHK`);
-            if(searchVal) activeFilters.push(`"${searchVal}"`);
-            
-            if(activeFilters.length > 0) {
-                status.innerHTML = `Showing results for: <strong class="text-white">${activeFilters.join(' & ')}</strong>`;
-            } else {
-                status.innerHTML = `Browsing all exclusive properties.`;
-            }
-        }
+    .mobile-card-top {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+    }
 
-        // Event Listeners for Live Filtering
-        pageLocFilter.addEventListener('change', applyFilters);
-        pageBhkFilter.addEventListener('change', applyFilters);
-        pageSearchFilter.addEventListener('input', applyFilters);
-        
-        // Clear Filters Button Logic
-        clearPageFiltersBtn.addEventListener('click', () => {
-            pageLocFilter.value = 'All';
-            pageBhkFilter.value = 'All';
-            pageSearchFilter.value = '';
-            applyFilters();
-            // Clear the URL parameters without reloading the page
-            window.history.replaceState({}, document.title, window.location.pathname);
-        });
+    .mobile-card-top img {
+        width: 95px;
+        height: 75px;
+        border-radius: 10px;
+        object-fit: cover;
+    }
 
-        // Setup Initial State from Homepage Redirect (URL Parameters)
-        window.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            let hasParams = false;
+    .mobile-card-info {
+        flex: 1;
+    }
 
-            if (urlParams.get('loc')) {
-                pageLocFilter.value = urlParams.get('loc');
-                hasParams = true;
-            }
-            if (urlParams.get('bhk')) {
-                pageBhkFilter.value = urlParams.get('bhk');
-                hasParams = true;
-            }
+    .mobile-card-title {
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 4px;
+        color: #222;
+        line-height: 1.3;
+    }
 
-            // Run initial filter to apply URL params or show all
-            applyFilters();
-        });
+    .mobile-card-price {
+        font-size: 14px;
+        font-weight: 600;
+        color: #2c335d;
+        margin-bottom: 2px;
+    }
 
-    </script>
+    .mobile-card-price.weekend {
+        color: #e53935;
+    }
+
+    /* 🔥 BUTTON LIKE IMAGE */
+    .mobile-desc-btn {
+        display: inline-block;
+        background: #2c335d;
+        color: #fff;
+        font-size: 12px;
+        padding: 0px 9px;
+        border-radius: 13px;
+        margin-top: 6px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .mobile-desc-btn:hover {
+        background: #1f2a44;
+    }
+
+    /* DESCRIPTION BOX */
+    .mobile-desc {
+        display: none;
+        margin-top: 10px;
+        font-size: 13px;
+        color: #555;
+        background: #f9f9f9;
+        padding: 10px;
+        border-radius: 8px;
+        position: relative;
+    }
+
+    .mobile-desc-close {
+        position: absolute;
+        top: 5px;
+        right: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        color: #e53935;
+        font-weight: bold;
+    }
+}
+  </style>
+
+    
+<!-- TITLE BAR -->
+<div class="parallax titlebar" data-background="https://www.villacatalogues.com/public/website/assets/images/listings-parallax.jpg">
+    <div id="titlebar">
+        <div class="container">
+            <h2>Villa List</h2>
+            <nav id="breadcrumbs">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li>Villa List</li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<div class="share-now-bar">
+    <button type="button" id="copyBtn" onclick="copyLink(this)">
+        Share Now
+    </button>
+
+    <button type="button" class="share-icon-btn" onclick="sharePage()">
+        <i class="fa fa-share-alt"></i>
+    </button>
+</div>
+
+
+<!-- CONTENT -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/91.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/69d5113db828a.jpg" alt="BOOKING DETAILS">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">BOOKING DETAILS</div>
+                            <div class="villa-location">All location</div>
+                            <div class="villa-price">₹ 1</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/90.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/69d51199cc3e3.jpg" alt="ONLY BOOK ON THIS WHATSAPP NUMBER.">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">ONLY BOOK ON THIS WHATSAPP NUMBER.</div>
+                            <div class="villa-location">All location</div>
+                            <div class="villa-price">₹ 1</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/89.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/698ef816c5248.jpg" alt="5 BHK DREAMWOOD VILLA - PAWNA / LONAVALA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">5 BHK DREAMWOOD VILLA - PAWNA / LONAVALA</div>
+                            <div class="villa-location">PAWNA</div>
+                            <div class="villa-price">₹ 18,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/88.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/698ef6ab33bfe.jpg" alt="6 BHK DUBASH FARM - MAHABLESHWAR">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">6 BHK DUBASH FARM - MAHABLESHWAR</div>
+                            <div class="villa-location">MAHABLESHWAR</div>
+                            <div class="villa-price">₹ 20,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/87.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/698ef60bc9d5e.jpg" alt="6 BHK GLASS HOUSE - PAWNA / LONAVALA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">6 BHK GLASS HOUSE - PAWNA / LONAVALA</div>
+                            <div class="villa-location">PAWNA</div>
+                            <div class="villa-price">₹ 22,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/85.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/698e3b6a8029a.webp" alt="5 BHK VILAS SAKHARAM WAGHMARE HOME - LONAWALA/ PAWNA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">5 BHK VILAS SAKHARAM WAGHMARE HOME - LONAWALA/ PAWNA</div>
+                            <div class="villa-location">LONAVALA/PAWNA</div>
+                            <div class="villa-price">₹ 25,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/84.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697f49a5e9ed6.jpg" alt="3 BHK - THAKWAD NIWAS - KARJAT">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">3 BHK - THAKWAD NIWAS - KARJAT</div>
+                            <div class="villa-location">KARJAT</div>
+                            <div class="villa-price">₹ 9,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/83.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697c8bd128f54.jpg" alt="7 BHK THE WHITE HELL - KARJAT">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">7 BHK THE WHITE HELL - KARJAT</div>
+                            <div class="villa-location">KARJAT</div>
+                            <div class="villa-price">₹ 28,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/82.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697c8a1f8005e.jpg" alt="12 BHK ANJIRAM VILLA - LONAVALA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">12 BHK ANJIRAM VILLA - LONAVALA</div>
+                            <div class="villa-location">LONAVALA</div>
+                            <div class="villa-price">₹ 44,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/81.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697c899008fce.jpg" alt="12 BHK SINGARA VILLA -KARJAT">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">12 BHK SINGARA VILLA -KARJAT</div>
+                            <div class="villa-location">KARJAT</div>
+                            <div class="villa-price">₹ 44,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/80.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697c8783af0f6.jpg" alt="10 BHK CASA DE KRI - KARJAT">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">10 BHK CASA DE KRI - KARJAT</div>
+                            <div class="villa-location">KARJAT</div>
+                            <div class="villa-price">₹ 32,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/79.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697c8573922ef.jpg" alt="10 BHK PARIS VILLA - LONAVALA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">10 BHK PARIS VILLA - LONAVALA</div>
+                            <div class="villa-location">LONAVALA</div>
+                            <div class="villa-price">₹ 32,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/78.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697c849087150.jpg" alt="8 BHK MAHABIR VILLA - KARJAT">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">8 BHK MAHABIR VILLA - KARJAT</div>
+                            <div class="villa-location">KARJAT</div>
+                            <div class="villa-price">₹ 28,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/77.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697c7db6c1f85.jpg" alt="8 BHK HILLJILL VILLA - IGATPURI">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">8 BHK HILLJILL VILLA - IGATPURI</div>
+                            <div class="villa-location">IGATPURI</div>
+                            <div class="villa-price">₹ 22,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/76.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697c7cac43a32.jpg" alt="8 BHK HIRRO VILLA - ALIBAUG">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">8 BHK HIRRO VILLA - ALIBAUG</div>
+                            <div class="villa-location">ALIBAUG</div>
+                            <div class="villa-price">₹ 22,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/75.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697c6e9ce2698.jpg" alt="8 BHK APRIT VILLA - LONAVALA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">8 BHK APRIT VILLA - LONAVALA</div>
+                            <div class="villa-location">LONAVALA</div>
+                            <div class="villa-price">₹ 35,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/74.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697c588db0c45.jpg" alt="7 BHK JIWA VILLA - ALIBAUG">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">7 BHK JIWA VILLA - ALIBAUG</div>
+                            <div class="villa-location">ALIBAUG</div>
+                            <div class="villa-price">₹ 20,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/73.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697c57abebfea.jpg" alt="7 BHK HARSI VILLA - LONAVALA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">7 BHK HARSI VILLA - LONAVALA</div>
+                            <div class="villa-location">LONAVALA</div>
+                            <div class="villa-price">₹ 28,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/72.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697c5700e2dfa.jpg" alt="7 BHK BUDDHA VIHAR - KARJAT">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">7 BHK BUDDHA VIHAR - KARJAT</div>
+                            <div class="villa-location">KARJAT</div>
+                            <div class="villa-price">₹ 28,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/71.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697c55c2f328c.jpg" alt="7 BHK LUXURY HUT VILLA - KARJAT">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">7 BHK LUXURY HUT VILLA - KARJAT</div>
+                            <div class="villa-location">KARJAT</div>
+                            <div class="villa-price">₹ 52,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/70.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697c54c753425.jpg" alt="7 BHK IGRI HORA TURF VILLA - IGATPURI">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">7 BHK IGRI HORA TURF VILLA - IGATPURI</div>
+                            <div class="villa-location">IGATPURI</div>
+                            <div class="villa-price">₹ 19,500</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/69.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697c526dd09bb.jpg" alt="6 BHK PERCHE OFFGRID  - LONAVALA / PAWNA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">6 BHK PERCHE OFFGRID  - LONAVALA / PAWNA</div>
+                            <div class="villa-location">PAWNA</div>
+                            <div class="villa-price">₹ 23,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/68.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697c519257801.jpg" alt="6 BHK BHUBTARA - LONAVALA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">6 BHK BHUBTARA - LONAVALA</div>
+                            <div class="villa-location">LONAVALA</div>
+                            <div class="villa-price">₹ 22,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/67.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697c5065ed6e0.jpg" alt="6 BHK LAKDAWALA BUNGALOW - LONAVALA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">6 BHK LAKDAWALA BUNGALOW - LONAVALA</div>
+                            <div class="villa-location">LONAVALA</div>
+                            <div class="villa-price">₹ 20,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/66.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697c4f67a9915.jpg" alt="6 BHK HOUSEN VILLA - LONAVALA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">6 BHK HOUSEN VILLA - LONAVALA</div>
+                            <div class="villa-location">LONAVALA</div>
+                            <div class="villa-price">₹ 19,500</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/65.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697c4e359a180.jpg" alt="6 BHK BLACK STONE VILLA - LONAVALA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">6 BHK BLACK STONE VILLA - LONAVALA</div>
+                            <div class="villa-location">LONAVALA</div>
+                            <div class="villa-price">₹ 16,500</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/64.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697b3c3b637f8.jpg" alt="5 BHK BREEZA BAND - KARJAT">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">5 BHK BREEZA BAND - KARJAT</div>
+                            <div class="villa-location">KARJAT</div>
+                            <div class="villa-price">₹ 17,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/63.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697b3a32477f4.jpg" alt="5 BHK EKAYA FARMS- LONAVALA / PAWNA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">5 BHK EKAYA FARMS- LONAVALA / PAWNA</div>
+                            <div class="villa-location">PAWNA</div>
+                            <div class="villa-price">₹ 16,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/62.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697b397f32837.jpg" alt="5 BHK SEWAKET VILLA - ALIBAUG">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">5 BHK SEWAKET VILLA - ALIBAUG</div>
+                            <div class="villa-location">ALIBAUG</div>
+                            <div class="villa-price">₹ 14,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/61.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697b38d76f70f.jpg" alt="5 BHK SOMNA VILLA - ALIBAUG">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">5 BHK SOMNA VILLA - ALIBAUG</div>
+                            <div class="villa-location">ALIBAUG</div>
+                            <div class="villa-price">₹ 14,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/60.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697b370a0659e.jpg" alt="5 BHK DOLCEVITA - LONAVALA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">5 BHK DOLCEVITA - LONAVALA</div>
+                            <div class="villa-location">LONAVALA</div>
+                            <div class="villa-price">₹ 16,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/59.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697b364258b93.jpg" alt="5 BHK BAMBLE VILLA - IGATPURI">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">5 BHK BAMBLE VILLA - IGATPURI</div>
+                            <div class="villa-location">IGATPURI</div>
+                            <div class="villa-price">₹ 15,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/58.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697b3549bea7c.jpg" alt="5 BHK LIGO VILLA - KARJAT">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">5 BHK LIGO VILLA - KARJAT</div>
+                            <div class="villa-location">KARJAT</div>
+                            <div class="villa-price">₹ 13,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/57.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697b3364d2dad.jpg" alt="5 BHK MARHABA VILLA - MAHABLESHWAR">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">5 BHK MARHABA VILLA - MAHABLESHWAR</div>
+                            <div class="villa-location">MAHABLESHWAR</div>
+                            <div class="villa-price">₹ 18,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/56.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697b31695e96a.jpg" alt="5 BHK KAMISAT VILLA - LONAVALA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">5 BHK KAMISAT VILLA - LONAVALA</div>
+                            <div class="villa-location">LONAVALA</div>
+                            <div class="villa-price">₹ 13,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/55.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697b2f619c928.jpg" alt="5 BHK DRIFTWOOD - PANCHGANI">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">5 BHK DRIFTWOOD - PANCHGANI</div>
+                            <div class="villa-location">PANCHGANI</div>
+                            <div class="villa-price">₹ 17,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/54.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697b0181bedcb.jpg" alt="4 BHK VIRA FARM - KARJAT">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">4 BHK VIRA FARM - KARJAT</div>
+                            <div class="villa-location">KARJAT</div>
+                            <div class="villa-price">₹ 12,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/53.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697aff08d0f90.jpg" alt="4 BHK ALING MASK - ALIBAUG">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">4 BHK ALING MASK - ALIBAUG</div>
+                            <div class="villa-location">ALIBAUG</div>
+                            <div class="villa-price">₹ 10,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/52.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697afe21dcca2.jpg" alt="4 BHK DECK - PANCHGANI">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">4 BHK DECK - PANCHGANI</div>
+                            <div class="villa-location">PANCHGANI</div>
+                            <div class="villa-price">₹ 16,500</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/51.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697afc6b2a3f2.jpg" alt="4 BHK BORN COTTAGE - LONAVALA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">4 BHK BORN COTTAGE - LONAVALA</div>
+                            <div class="villa-location">LONAVALA</div>
+                            <div class="villa-price">₹ 16,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/50.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697af836283ef.jpg" alt="4 BHK NOVOTEL IMAGICA - PANCHGANI">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">4 BHK NOVOTEL IMAGICA - PANCHGANI</div>
+                            <div class="villa-location">PANCHGANI</div>
+                            <div class="villa-price">₹ 12,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/49.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697af64a63498.jpg" alt="4 BHK IGNO CASA - IGATPURI">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">4 BHK IGNO CASA - IGATPURI</div>
+                            <div class="villa-location">IGATPURI</div>
+                            <div class="villa-price">₹ 9,500</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/48.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697af5afb7a02.jpg" alt="4 BHK CORN VILLA - ALIBAUG">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">4 BHK CORN VILLA - ALIBAUG</div>
+                            <div class="villa-location">ALIBAUG</div>
+                            <div class="villa-price">₹ 10,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/47.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697af4b798449.jpg" alt="4 BHK PUSHKAR NALAWADE HOME - LONAVALA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">4 BHK PUSHKAR NALAWADE HOME - LONAVALA</div>
+                            <div class="villa-location">LONAVALA</div>
+                            <div class="villa-price">₹ 10,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/46.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697af16d55677.jpg" alt="4 BHK CRAZY BELL - KARJAT">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">4 BHK CRAZY BELL - KARJAT</div>
+                            <div class="villa-location">KARJAT</div>
+                            <div class="villa-price">₹ 10,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/45.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697af073ba976.jpg" alt="3 BHK THE LAST RESORT - MAHABLESHWAR">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">3 BHK THE LAST RESORT - MAHABLESHWAR</div>
+                            <div class="villa-location">MAHABLESHWAR</div>
+                            <div class="villa-price">₹ 8,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/44.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697ae8f554a3c.jpg" alt="3 BHK SUNFLOWER - LONAVALA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">3 BHK SUNFLOWER - LONAVALA</div>
+                            <div class="villa-location">LONAVALA</div>
+                            <div class="villa-price">₹ 9,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/43.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697ae7973df1d.jpg" alt="3 BHK VIRAJ DHULE - LONAVALA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">3 BHK VIRAJ DHULE - LONAVALA</div>
+                            <div class="villa-location">LONAVALA</div>
+                            <div class="villa-price">₹ 9,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/42.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697ae6e827e19.jpg" alt="3 BHK THE LAKE HOUSE - LONAVALA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">3 BHK THE LAKE HOUSE - LONAVALA</div>
+                            <div class="villa-location">LONAVALA</div>
+                            <div class="villa-price">₹ 7,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/41.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697a520e2aeac.jpg" alt="3 BHK VILLA OASIS - KARJAT">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">3 BHK VILLA OASIS - KARJAT</div>
+                            <div class="villa-location">KARJAT</div>
+                            <div class="villa-price">₹ 8,500</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/40.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697a5066be512.jpg" alt="3 BHK MERITASADORE - PANCHGANI">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">3 BHK MERITASADORE - PANCHGANI</div>
+                            <div class="villa-location">PANCHGANI</div>
+                            <div class="villa-price">₹ 9,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/39.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697a41b37c416.jpg" alt="3 BHK CLIFF SIDEAWAY - PANCHGANI">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">3 BHK CLIFF SIDEAWAY - PANCHGANI</div>
+                            <div class="villa-location">PANCHGANI</div>
+                            <div class="villa-price">₹ 9,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/35.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697a3bf075454.jpg" alt="2 BHK SHREE FARMS - KARJAT">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">2 BHK SHREE FARMS - KARJAT</div>
+                            <div class="villa-location">KARJAT</div>
+                            <div class="villa-price">₹ 5,500</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/34.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697a3b2fc69ac.jpg" alt="2 BHK SMOOKEY VILLA - IGATPURI">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">2 BHK SMOOKEY VILLA - IGATPURI</div>
+                            <div class="villa-location">IGATPURI</div>
+                            <div class="villa-price">₹ 5,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/33.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697a399c0250f.jpg" alt="2 BHK ANVI VILLA - ALIBAUG">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">2 BHK ANVI VILLA - ALIBAUG</div>
+                            <div class="villa-location">ALIBAUG</div>
+                            <div class="villa-price">₹ 5,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/32.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697a38d170341.jpg" alt="2 BHK ZINGO VALLEY - IGATPURI">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">2 BHK ZINGO VALLEY - IGATPURI</div>
+                            <div class="villa-location">IGATPURI</div>
+                            <div class="villa-price">₹ 5,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/31.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697a373e53595.jpg" alt="2 BHK DUNED DELIGHT - KARJAT">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">2 BHK DUNED DELIGHT - KARJAT</div>
+                            <div class="villa-location">KARJAT</div>
+                            <div class="villa-price">₹ 5,500</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/30.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697a35309d35a.jpg" alt="2 BHK SAPPHIRE SEASCAPE - KHANDALA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">2 BHK SAPPHIRE SEASCAPE - KHANDALA</div>
+                            <div class="villa-location">KHANDALA</div>
+                            <div class="villa-price">₹ 5,500</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/28.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697a327ac7494.jpg" alt="2 BHK TOPICALTIDE - LONAVALA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">2 BHK TOPICALTIDE - LONAVALA</div>
+                            <div class="villa-location">LONAVALA</div>
+                            <div class="villa-price">₹ 5,500</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/27.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697a1c1c9079d.jpg" alt="2 BHK RANGILA VILLA - ALIBAUG">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">2 BHK RANGILA VILLA - ALIBAUG</div>
+                            <div class="villa-location">ALIBAUG</div>
+                            <div class="villa-price">₹ 5,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/26.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697a0a5e66cee.jpg" alt="2 BHK AVION HOLIDAY - KARJAT">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">2 BHK AVION HOLIDAY - KARJAT</div>
+                            <div class="villa-location">KARJAT</div>
+                            <div class="villa-price">₹ 5,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/25.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697a078eb008d.jpg" alt="1 BEDROOM KESARI VILLA - KARJAT">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">1 BEDROOM KESARI VILLA - KARJAT</div>
+                            <div class="villa-location">KARJAT</div>
+                            <div class="villa-price">₹ 2,500</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/24.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697a03e394a67.jpg" alt="1 BEDROOM HIWARE VILLA - KARJAT">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">1 BEDROOM HIWARE VILLA - KARJAT</div>
+                            <div class="villa-location">KARJAT</div>
+                            <div class="villa-price">₹ 2,500</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/23.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697a00cc3e40e.jpg" alt="8 BHK SANDHU FARMS - LONAVALA / PAWNA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">8 BHK SANDHU FARMS - LONAVALA / PAWNA</div>
+                            <div class="villa-location">PAWNA</div>
+                            <div class="villa-price">₹ 35,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/22.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/6979ff85760e7.jpg" alt="7 BHK LOHKRA VILLA - LONAVALA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">7 BHK LOHKRA VILLA - LONAVALA</div>
+                            <div class="villa-location">LONAVALA</div>
+                            <div class="villa-price">₹ 27,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/21.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/6979fe54a5927.jpg" alt="6 BHK MASK STONE - KARJAT">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">6 BHK MASK STONE - KARJAT</div>
+                            <div class="villa-location">KARJAT</div>
+                            <div class="villa-price">₹ 24,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/20.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/6979fd05365d7.jpg" alt="5 BHK BATCOMB - KARJAT">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">5 BHK BATCOMB - KARJAT</div>
+                            <div class="villa-location">KARJAT</div>
+                            <div class="villa-price">₹ 18,500</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/19.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/6979fba445ba6.jpg" alt="4 BHK EARTH FARM - LONAVALA / PAWNA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">4 BHK EARTH FARM - LONAVALA / PAWNA</div>
+                            <div class="villa-location">PAWNA</div>
+                            <div class="villa-price">₹ 15,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/18.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/6979f8d3a3176.jpg" alt="3 BHK PRINCESS VILLA - LONAVALA / PAWNA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">3 BHK PRINCESS VILLA - LONAVALA / PAWNA</div>
+                            <div class="villa-location">PAWNA</div>
+                            <div class="villa-price">₹ 12,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/17.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/6979c0254b020.jpg" alt="2 BHK ROYAL CRYSTAL - LONAVALA">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">2 BHK ROYAL CRYSTAL - LONAVALA</div>
+                            <div class="villa-location">Lonavala</div>
+                            <div class="villa-price">₹ 5,500</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="villa-card">
+                        <a href="villa-detail/16.html">
+
+                            <div class="villa-image">
+                                                                <img src="public/villa/697c4c67e9ff3.jpg" alt="1 BEDROOM SOMNA CASA - KARJAT">
+                            </div>
+
+                            <div class="villa-content" style="text-align: left;">
+                            <div class="villa-name">1 BEDROOM SOMNA CASA - KARJAT</div>
+                            <div class="villa-location">Karjat</div>
+                            <div class="villa-price">₹ 3,000</div>
+                        </div>
+
+
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Footer -->
+<footer id="footer" class="footer-area">
+  <div class="container">
+    <div class="row">
+
+      <!-- Logo & About -->
+      <div class="col-md-4 col-sm-12" style="display:none;">
+        <a href="index.html">
+          <img class="footer-logo" src="public/website/assets/images/villalogo.png" alt="">
+        </a>
+        <p class="footer-about">
+          Beautifully designed luxury villas with modern facilities, open spaces, and peaceful surroundings—ideal for premium living.
+        </p>
+      </div>
+
+      <!-- Useful Links + Gallery + Social -->
+      <div class="col-md-8 col-sm-12">
+
+        <!-- Useful Links -->
+        <div class="row">
+          <div class="col-md-4 col-sm-6" style="display:none;">
+            <h4>Useful Links</h4>
+            <ul class="footer-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about-us.html">About Us</a></li>
+              <li><a href="our-gallery.html">Gallery</a></li>
+              <li><a href="villa-list.html">Villa List</a></li>
+              <li><a href="contact-us.html">Contact</a></li>
+            </ul>
+          </div>
+
+          <!-- Mini Gallery -->
+          <div class="col-md-4 col-sm-6" style="display:none;">
+				<h4>Gallery</h4>
+				<div class="footer-gallery">
+											<img src="public/gallery/1768922354696f9cf25b0ed.jpg" alt="Gallery Image">
+											<img src="public/gallery/1768922346696f9cea73ab3.jpg" alt="Gallery Image">
+											<img src="public/gallery/1768922337696f9ce148efb.jpg" alt="Gallery Image">
+											<img src="public/gallery/1768922327696f9cd7a2d92.jpg" alt="Gallery Image">
+											<img src="public/gallery/1768922245696f9c85c6958.jpg" alt="Gallery Image">
+									</div>
+			</div>
+
+
+          <!-- Social Media -->
+          <div class="col-md-4 col-sm-12" style="display:none;">
+            <h4>Follow Us</h4>
+            <div class="footer-social">
+              <a href="#"><i class="fa fa-facebook-f"></i></a>
+              <a href="#"><i class="fa fa-instagram"></i></a>
+              <a href="#"><i class="fa fa-twitter"></i></a>
+              <a href="#"><i class="fa fa-youtube"></i></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Bottom -->
+    <div class="row footer-bottom">
+      <div class="col-md-12 text-center">
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="public/website/assets/scripts/jquery-3.3.1.min.js"></script> 
+<script src="public/website/assets/scripts/bootstrap.min.js"></script>
+<script src="public/website/assets/scripts/chosen.min.js"></script> 
+<script src="public/website/assets/scripts/magnific-popup.min.js"></script> 
+<script src="public/website/assets/scripts/owl.carousel.min.js"></script> 
+<script src="public/website/assets/scripts/rangeSlider.js"></script> 
+<script src="public/website/assets/scripts/sticky-kit.min.js"></script> 
+<script src="public/website/assets/scripts/slick.min.js"></script> 
+<script src="public/website/assets/scripts/masonry.min.js"></script> 
+<script src="public/website/assets/scripts/mmenu.min.js"></script> 
+<script src="public/website/assets/scripts/tooltips.min.js"></script> 
+<script src="public/website/assets/scripts/typed.js"></script>
+<script src="public/website/assets/scripts/custom_jquery.js"></script> 
+
+<script>
+function copyLink(btn) {
+    navigator.clipboard.writeText(window.location.href).catch(() => {});
+    btn.disabled = true;
+    btn.style.opacity = "0.6";
+    btn.style.cursor = "not-allowed";
+}
+
+function sharePage() {
+    const shareData = {
+        title: document.title,
+        url: window.location.href
+    };
+
+    if (navigator.share) {
+        navigator.share(shareData).catch(() => {});
+    } else {
+        // fallback
+        navigator.clipboard.writeText(window.location.href).catch(() => {});
+    }
+}
+</script>
+
+
+
 </body>
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'},{'ap':'cpsh-oh'},{'server':'sg2plzcpnl508304'},{'dcenter':'sg2'},{'cp_id':'10876272'},{'cp_cl':'8'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='../img1.wsimg.com/signals/js/clients/scc-c2/scc-c2.min.js'></script>
+<!-- Mirrored from www.villacatalogues.com/villa-list by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Apr 2026 12:56:02 GMT -->
 </html>
