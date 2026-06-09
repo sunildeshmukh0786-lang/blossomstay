@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -270,7 +271,7 @@
             `;
 
             return `
-                <a href="villa.html?id=${realId}" class="block bg-[#1a1a1a] rounded-2xl overflow-hidden border border-gray-800 shadow-lg hover:shadow-2xl hover:border-[#d4af37]/50 hover:-translate-y-1 transition-all duration-300 h-full flex flex-col group">
+                <a href="${v.url}" class="block bg-[#1a1a1a] rounded-2xl overflow-hidden border border-gray-800 shadow-lg hover:shadow-2xl hover:border-[#d4af37]/50 hover:-translate-y-1 transition-all duration-300 h-full flex flex-col group">
                     <div class="relative h-56 overflow-hidden bg-gray-900">
                         <img src="${v.img}" onerror="this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=400'" alt="${v.title}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                         <div class="absolute top-4 left-4 bg-black/70 backdrop-blur-sm px-3 py-1 rounded text-white text-[10px] font-bold tracking-widest uppercase border border-white/10">
