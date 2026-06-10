@@ -21,7 +21,7 @@
             background: white;
         }
     </style>
-<style>body{background-color:#111!important;color:#f3f4f6!important}#header-container,#header{background-color:#0a0a0a!important;border-bottom:1px solid #333!important}#logo a,#navigation a{color:#d4af37!important}.parallax.titlebar,.property-titlebar{background-color:#111!important}h1,h2,h3,h4,h5,h6,.property-title h2,.widget-title,.utf-desc-headline-item h3{color:#d4af37!important}.villa-full-description,.boxed-widget,.review-card{background-color:#1a1a1a!important;border:1px solid #333!important;color:#ccc!important}p,span,div,strong,li{color:#ccc!important}.property-pricing-text div{color:#d4af37!important;font-size:20px}.footer-area{background-color:#0a0a0a!important;border-top:1px solid #333!important}.review-name{color:#fff!important}.button{background-color:#d4af37!important;color:#111!important}</style><style>body{background-color:#111!important;color:#f3f4f6!important}#header-container,#header{background-color:#0a0a0a!important;border-bottom:1px solid #333!important}#logo a,#navigation a{color:#d4af37!important}.parallax.titlebar,.property-titlebar{background-color:#111!important}h1,h2,h3,h4,h5,h6,.property-title h2,.widget-title,.utf-desc-headline-item h3{color:#d4af37!important}.villa-full-description,.boxed-widget,.review-card{background-color:#1a1a1a!important;border:1px solid #333!important;color:#ccc!important}p,span,div,strong,li{color:#ccc!important}.property-pricing-text div{color:#d4af37!important;font-size:20px}.footer-area{background-color:#0a0a0a!important;border-top:1px solid #333!important}.review-name{color:#fff!important}.button{background-color:#d4af37!important;color:#111!important}</style></head>
+</head>
 <body class="bg-[#111111] overflow-x-hidden">
     <nav class="bg-[#0a0a0a] w-full z-40 px-4 py-6 border-b border-gray-800">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
@@ -256,6 +256,8 @@
 
         // Function to create a luxury card for each villa
         function createCard(v) {
+            const realId = v.url.replace('villa-detail/', '').replace('.html', '');
+            
             let priceHtml = `
                 <div class="flex justify-between items-center mb-2">
                     <span class="text-gray-400 text-[10px] font-bold uppercase tracking-widest">Weekdays</span>
@@ -268,7 +270,7 @@
             `;
 
             return `
-                <a href="${v.url}" class="block bg-[#1a1a1a] rounded-2xl overflow-hidden border border-gray-800 shadow-lg hover:shadow-2xl hover:border-[#d4af37]/50 hover:-translate-y-1 transition-all duration-300 h-full flex flex-col group">
+                <a href="villa-view.html?id=${realId}" class="block bg-[#1a1a1a] rounded-2xl overflow-hidden border border-gray-800 shadow-lg hover:shadow-2xl hover:border-[#d4af37]/50 hover:-translate-y-1 transition-all duration-300 h-full flex flex-col group">
                     <div class="relative h-56 overflow-hidden bg-gray-900">
                         <img src="${v.img}" onerror="this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=400'" alt="${v.title}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                         <div class="absolute top-4 left-4 bg-black/70 backdrop-blur-sm px-3 py-1 rounded text-white text-[10px] font-bold tracking-widest uppercase border border-white/10">
