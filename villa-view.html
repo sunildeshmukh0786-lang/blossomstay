@@ -13,7 +13,6 @@
         body { font-family: 'Inter', sans-serif; background-color: #111111; color: #f3f4f6; }
         .serif { font-family: 'Playfair Display', serif; }
         
-        /* Smooth scrolling */
         html { scroll-behavior: smooth; }
         
         /* Glassmorphism booking card */
@@ -23,6 +22,10 @@
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        
+        /* Hide scrollbar for gallery thumbnails */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="bg-[#111111] overflow-x-hidden">
@@ -44,13 +47,39 @@
         </div>
     </nav>
 
-    <!-- Content Area (Filled dynamically by JavaScript) -->
+    <!-- Main Content Area -->
     <main id="villa-content" class="min-h-screen">
-        <!-- Loading State -->
         <div class="flex items-center justify-center h-[60vh]">
             <i class="fa-solid fa-circle-notch fa-spin text-[#d4af37] text-4xl"></i>
         </div>
     </main>
+
+    <!-- FULLSCREEN IMAGE GALLERY MODAL (Hidden by default) -->
+    <div id="galleryModal" class="fixed inset-0 bg-black/95 z-50 hidden flex-col">
+        <!-- Header -->
+        <div class="flex justify-between items-center p-6 text-white absolute top-0 w-full z-10">
+            <div class="text-sm font-semibold tracking-widest uppercase" id="galleryCount">1 / 5</div>
+            <button onclick="closeGallery()" class="text-gray-400 hover:text-white text-3xl transition">
+                <i class="fa-solid fa-times"></i>
+            </button>
+        </div>
+        
+        <!-- Main Image Viewer -->
+        <div class="flex-grow flex items-center justify-center relative w-full h-full px-4 md:px-20">
+            <!-- Left Arrow -->
+            <button onclick="changeImage(-1)" class="absolute left-4 md:left-10 text-white/50 hover:text-white text-4xl md:text-6xl transition z-10">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            
+            <!-- Current Image -->
+            <img id="modalMainImage" src="" class="max-h-[85vh] max-w-full object-contain shadow-2xl transition-opacity duration-300">
+            
+            <!-- Right Arrow -->
+            <button onclick="changeImage(1)" class="absolute right-4 md:right-10 text-white/50 hover:text-white text-4xl md:text-6xl transition z-10">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-[#0a0a0a] text-gray-400 py-12 border-t border-gray-800 mt-12">
@@ -62,108 +91,117 @@
     </footer>
 
     <script>
-        // FULL VILLA DATABASE (Same as your villa-list.html)
+        // FULL VILLA DATABASE
         const villas = [
-            // 1 BHK
-            { id: "25", bhk: 1, title: "1 BEDROOM KESARI VILLA", loc: "KARJAT", priceWd: "2500", priceWe: "5500", img: "public/villa/697deba4b2c24.jpg" },
-            { id: "24", bhk: 1, title: "1 BEDROOM HIWARE VILLA", loc: "KARJAT", priceWd: "2500", priceWe: "5500", img: "public/villa/697c496de583c.jpg" },
-            { id: "16", bhk: 1, title: "1 BEDROOM SOMNA CASA", loc: "KARJAT", priceWd: "3000", priceWe: "6000", img: "public/villa/697de6820ce6d.jpg" },
-            
-            // 2 BHK
-            { id: "35", bhk: 2, title: "2 BHK SHREE FARMS", loc: "KARJAT", priceWd: "5500", priceWe: "9500", img: "public/villa/697dec1f0c65d.jpg" },
-            { id: "34", bhk: 2, title: "2 BHK SMOOKEY VILLA", loc: "IGATPURI", priceWd: "5000", priceWe: "8000", img: "public/villa/697a3b2fcbbb5.jpg" },
-            { id: "33", bhk: 2, title: "2 BHK ANVI VILLA", loc: "ALIBAUG", priceWd: "5000", priceWe: "9000", img: "public/villa/697a399c07787.jpg" },
-            { id: "32", bhk: 2, title: "2 BHK ZINGO VALLEY", loc: "IGATPURI", priceWd: "5000", priceWe: "9000", img: "public/villa/697a38d173697.jpg" },
-            { id: "31", bhk: 2, title: "2 BHK DUNED DELIGHT", loc: "KARJAT", priceWd: "5500", priceWe: "9000", img: "public/villa/697a373e58b23.jpg" },
-            { id: "30", bhk: 2, title: "2 BHK SAPPHIRE SEASCAPE", loc: "KHANDALA", priceWd: "5500", priceWe: "9000", img: "public/villa/697a3530a1467.jpg" },
-            { id: "28", bhk: 2, title: "2 BHK TOPICALTIDE", loc: "LONAVALA", priceWd: "5500", priceWe: "9000", img: "public/villa/697a327acb00a.jpg" },
-            { id: "27", bhk: 2, title: "2 BHK RANGILA VILLA", loc: "ALIBAUG", priceWd: "5000", priceWe: "9000", img: "public/villa/697a1c1c93270.jpg" },
-            { id: "26", bhk: 2, title: "2 BHK AVION HOLIDAY", loc: "KARJAT", priceWd: "5000", priceWe: "9000", img: "public/villa/697a0a5e6bb6c.jpg" },
-            { id: "17", bhk: 2, title: "2 BHK ROYAL CRYSTAL", loc: "LONAVALA", priceWd: "5500", priceWe: "9500", img: "public/villa/6979c02550ae8.jpg" },
-
-            // 3 BHK
-            { id: "84", bhk: 3, title: "3 BHK THAKWAD NIWAS", loc: "KARJAT", priceWd: "9000", priceWe: "15000", img: "public/villa/697f49a5ef5eb.jpg" },
-            { id: "45", bhk: 3, title: "3 BHK THE LAST RESORT", loc: "MAHABLESHWAR", priceWd: "8000", priceWe: "12000", img: "public/villa/697af073bd369.url" }, // Note: check extension later
-            { id: "44", bhk: 3, title: "3 BHK SUNFLOWER", loc: "LONAVALA", priceWd: "9000", priceWe: "16000", img: "public/villa/697ae8f5593c5.jpg" },
-            { id: "43", bhk: 3, title: "3 BHK VIRAJ DHULE", loc: "LONAVALA", priceWd: "9000", priceWe: "16000", img: "public/villa/697fc6bb1dcb7.jpg" },
-            { id: "42", bhk: 3, title: "3 BHK THE LAKE HOUSE", loc: "LONAVALA", priceWd: "7000", priceWe: "10000", img: "public/villa/697ae6e82cc9d.jpg" },
-            { id: "41", bhk: 3, title: "3 BHK VILLA OASIS", loc: "KARJAT", priceWd: "8500", priceWe: "15000", img: "public/villa/697a520e2f933.jpg" },
-            { id: "40", bhk: 3, title: "3 BHK MERITASADORE", loc: "PANCHGANI", priceWd: "9000", priceWe: "14000", img: "public/villa/697a5066c4081.jpg" },
-            { id: "39", bhk: 3, title: "3 BHK CLIFF SIDEAWAY", loc: "PANCHGANI", priceWd: "9000", priceWe: "14000", img: "public/villa/697a41b380265.jpg" },
-            { id: "18", bhk: 3, title: "3 BHK PRINCESS VILLA", loc: "LONAVALA / PAWNA", priceWd: "12000", priceWe: "18000", img: "public/villa/697f1770d98ac.jpg" },
-
-            // 4 BHK
-            { id: "54", bhk: 4, title: "4 BHK VIRA FARM", loc: "KARJAT", priceWd: "12000", priceWe: "24000", img: "public/villa/697f1311863a4.jpg" },
-            { id: "53", bhk: 4, title: "4 BHK ALING MASK", loc: "ALIBAUG", priceWd: "10000", priceWe: "18000", img: "public/villa/697aff08d532e.jpg" },
-            { id: "52", bhk: 4, title: "4 BHK DECK", loc: "PANCHGANI", priceWd: "16500", priceWe: "21000", img: "public/villa/697afe21e0fd0.jpg" },
-            { id: "51", bhk: 4, title: "4 BHK BORN COTTAGE", loc: "LONAVALA", priceWd: "16000", priceWe: "21000", img: "public/villa/697afc6b2ef8e.jpg" },
-            { id: "50", bhk: 4, title: "4 BHK NOVOTEL IMAGICA", loc: "PANCHGANI", priceWd: "12000", priceWe: "18000", img: "public/villa/697af8362bf38.jpg" },
-            { id: "49", bhk: 4, title: "4 BHK IGNO CASA", loc: "IGATPURI", priceWd: "9500", priceWe: "16000", img: "public/villa/697af64a65de4.jpg" },
-            { id: "48", bhk: 4, title: "4 BHK CORN VILLA", loc: "ALIBAUG", priceWd: "10000", priceWe: "18000", img: "public/villa/697af5afbb342.jpg" },
-            { id: "47", bhk: 4, title: "4 BHK PUSHKAR NALAWADE", loc: "LONAVALA", priceWd: "10000", priceWe: "18000", img: "public/villa/697f3d0b5d7f4.jpg" },
-            { id: "46", bhk: 4, title: "4 BHK CRAZY BELL", loc: "KARJAT", priceWd: "10000", priceWe: "18000", img: "public/villa/697af16d591ac.jpg" },
-            { id: "19", bhk: 4, title: "4 BHK EARTH FARM", loc: "LONAVALA / PAWNA", priceWd: "15000", priceWe: "22000", img: "public/villa/697f090e0f11d.jpg" },
-
-            // 5 BHK
+            // Example of a fully populated gallery (Glass House ID 87)
+            { 
+                id: "87", bhk: 6, title: "6 BHK GLASS HOUSE", loc: "PAWNA / LONAVALA", priceWd: "22000", priceWe: "39000", img: "public/villa/698ef60bc9d5e.jpg", isPerPersonOffer: true, ppPrice: "1499", desc: "Includes All Meals (Proper Jain Food available), BBQ Setup, and Extra Guest Charges! Plus, free Wi-Fi, television, swimming pool access, and more.",
+                gallery: [
+                    "public/villa/698ef60bc9d5e.jpg",
+                    "public/villa/698ef60bca45e.jpg",
+                    "public/villa/698ef60bca78f.jpg",
+                    "public/villa/698ef60bcaa6f.jpg",
+                    "public/villa/698ef60bcad73.jpg",
+                    "public/villa/698ef60bcb090.jpg",
+                    "public/villa/698ef60bcb62b.jpg"
+                ]
+            },
             { id: "89", bhk: 5, title: "5 BHK DREAMWOOD VILLA", loc: "PAWNA / LONAVALA", priceWd: "18000", priceWe: "28000", img: "public/villa/69c3f8de08ca0.jpg" },
-            { id: "85", bhk: 5, title: "5 BHK VILAS SAKHARAM WAGHMARE", loc: "LONAVALA", priceWd: "1400", priceWe: "1400", isPerPersonOffer: true, img: "public/villa/69c3f94f8ce61.jpg", ppPrice: "1400", desc: "Includes BBQ Setup, free Wi-Fi, television, swimming pool access, and more. Delicious meals available as an add-on." },
-            { id: "64", bhk: 5, title: "5 BHK BREEZA BAND", loc: "KARJAT", priceWd: "17000", priceWe: "24000", img: "public/villa/697b3c3b68ef6.jpg" },
-            { id: "63", bhk: 5, title: "5 BHK EKAYA FARMS", loc: "LONAVALA / PAWNA", priceWd: "16000", priceWe: "23000", img: "public/villa/697f450899339.jpg" },
-            { id: "62", bhk: 5, title: "5 BHK SEWAKET VILLA", loc: "ALIBAUG", priceWd: "14000", priceWe: "22000", img: "public/villa/697b397f37dc0.jpg" },
-            { id: "61", bhk: 5, title: "5 BHK SOMNA VILLA", loc: "ALIBAUG", priceWd: "14000", priceWe: "22000", img: "public/villa/697b38d773a32.jpg" },
-            { id: "60", bhk: 5, title: "5 BHK DOLCEVITA", loc: "LONAVALA", priceWd: "16000", priceWe: "26000", img: "public/villa/697b370a0a3ef.jpg" },
-            { id: "59", bhk: 5, title: "5 BHK BAMBLE VILLA", loc: "IGATPURI", priceWd: "15000", priceWe: "23000", img: "public/villa/697f3a6c6a8ca.jpg" },
-            { id: "58", bhk: 5, title: "5 BHK LIGO VILLA", loc: "KARJAT", priceWd: "13000", priceWe: "25000", img: "public/villa/697b3549c3010.jpg" },
-            { id: "57", bhk: 5, title: "5 BHK MARHABA VILLA", loc: "MAHABLESHWAR", priceWd: "18000", priceWe: "28000", img: "public/villa/697b3364da2b5.jpg" },
-            { id: "56", bhk: 5, title: "5 BHK KAMISAT VILLA", loc: "LONAVALA", priceWd: "13000", priceWe: "25000", img: "public/villa/697b316961de8.jpg" },
-            { id: "55", bhk: 5, title: "5 BHK DRIFTWOOD", loc: "PANCHGANI", priceWd: "17000", priceWe: "24000", img: "public/villa/697b2f61a1b27.jpg" },
-            { id: "20", bhk: 5, title: "5 BHK BATCOMB", loc: "KARJAT", priceWd: "18500", priceWe: "28000", img: "public/villa/6979fd053adde.jpg" },
-
-            // 6 BHK
             { id: "88", bhk: 6, title: "6 BHK DUBASH FARM", loc: "MAHABLESHWAR", priceWd: "20000", priceWe: "35000", img: "public/villa/69c3f8c083d18.jpg" },
-            { id: "87", bhk: 6, title: "6 BHK GLASS HOUSE", loc: "PAWNA / LONAVALA", priceWd: "1499", priceWe: "1499", isPerPersonOffer: true, img: "public/villa/69c3f90b7e4d3.jpg", ppPrice: "1499", desc: "Includes All Meals (Proper Jain Food available), BBQ Setup, and Extra Guest Charges! Plus, free Wi-Fi, television, swimming pool access, and more." },
-            { id: "69", bhk: 6, title: "6 BHK PERCHE OFFGRID", loc: "LONAVALA / PAWNA", priceWd: "23000", priceWe: "39000", img: "public/villa/697f084cb5b66.jpg" },
-            { id: "68", bhk: 6, title: "6 BHK BHUBTARA", loc: "LONAVALA", priceWd: "22000", priceWe: "39000", img: "public/villa/697f13c93e07b.jpg" },
-            { id: "67", bhk: 6, title: "6 BHK LAKDAWALA BUNGALOW", loc: "LONAVALA", priceWd: "20000", priceWe: "38000", img: "public/villa/697f3c2842990.jpg" },
-            { id: "66", bhk: 6, title: "6 BHK HOUSEN VILLA", loc: "LONAVALA", priceWd: "19500", priceWe: "28000", img: "public/villa/697c4f67ad930.jpg" },
-            { id: "65", bhk: 6, title: "6 BHK BLACK STONE VILLA", loc: "LONAVALA", priceWd: "16500", priceWe: "28500", img: "public/villa/697c4e359d6e4.jpg" },
-            { id: "21", bhk: 6, title: "6 BHK MASK STONE", loc: "KARJAT", priceWd: "24000", priceWe: "42000", img: "public/villa/6979fe54aa120.jpg" },
-
-            // 7 BHK
-            { id: "83", bhk: 7, title: "7 BHK THE WHITE HELL", loc: "KARJAT", priceWd: "28000", priceWe: "42000", img: "public/villa/69c3f9774c0cb.jpg" },
-            { id: "74", bhk: 7, title: "7 BHK JIWA VILLA", loc: "ALIBAUG", priceWd: "20000", priceWe: "32000", img: "public/villa/69c3fa2e60b39.jpg" },
-            { id: "73", bhk: 7, title: "7 BHK HARSI VILLA", loc: "LONAVALA", priceWd: "28000", priceWe: "48000", img: "public/villa/697c57abf00cd.jpg" },
-            { id: "72", bhk: 7, title: "7 BHK BUDDHA VIHAR", loc: "KARJAT", priceWd: "28000", priceWe: "48000", img: "public/villa/697f0a42523a9.jpg" },
-            { id: "71", bhk: 7, title: "7 BHK LUXURY HUT VILLA", loc: "KARJAT", priceWd: "52000", priceWe: "90000", img: "public/villa/697c55c302d4e.jpg" },
-            { id: "70", bhk: 7, title: "7 BHK IGRI HORA TURF VILLA", loc: "IGATPURI", priceWd: "19500", priceWe: "39500", img: "public/villa/697c54c757230.jpg" },
-            { id: "22", bhk: 7, title: "7 BHK LOHKRA VILLA", loc: "LONAVALA", priceWd: "27000", priceWe: "42000", img: "public/villa/6979ff8579761.url" },
-
-            // 8 BHK
-            { id: "78", bhk: 8, title: "8 BHK MAHABIR VILLA", loc: "KARJAT", priceWd: "28000", priceWe: "48000", img: "public/villa/69c3f9d0b9386.jpg" },
-            { id: "77", bhk: 8, title: "8 BHK HILLJILL VILLA", loc: "IGATPURI", priceWd: "22000", priceWe: "42000", img: "public/villa/697c7db6c753e.jpg" },
-            { id: "76", bhk: 8, title: "8 BHK HIRRO VILLA", loc: "ALIBAUG", priceWd: "22000", priceWe: "42000", img: "public/villa/69c3f9f804616.jpg" },
-            { id: "75", bhk: 8, title: "8 BHK APRIT VILLA", loc: "LONAVALA", priceWd: "35000", priceWe: "58000", img: "public/villa/697c6e9ce2698.jpg" },
-            { id: "23", bhk: 8, title: "8 BHK SANDHU FARMS", loc: "LONAVALA / PAWNA", priceWd: "35000", priceWe: "58000", img: "public/villa/697f3df10d88c.jpg" },
-
-            // 10 BHK
-            { id: "80", bhk: 10, title: "10 BHK CASA DE KRI", loc: "KARJAT", priceWd: "32000", priceWe: "60000", img: "public/villa/697c8783b280a.jpg" },
+            { id: "85", bhk: 5, title: "5 BHK VILAS SAKHARAM WAGHMARE", loc: "LONAVALA", priceWd: "25000", priceWe: "35000", img: "public/villa/698e3b6a8029a.webp", isPerPersonOffer: true, ppPrice: "1400", desc: "Includes BBQ Setup, free Wi-Fi, television, swimming pool access, and more. Delicious meals available as an add-on." },
+            { id: "84", bhk: 3, title: "3 BHK THAKWAD NIWAS", loc: "KARJAT", priceWd: "9000", priceWe: "15000", img: "public/villa/697f49a5e9ed6.jpg" },
+            { id: "83", bhk: 7, title: "7 BHK THE WHITE HELL", loc: "KARJAT", priceWd: "28000", priceWe: "42000", img: "public/villa/697c8bd128f54.jpg" },
+            { id: "82", bhk: 12, title: "12 BHK ANJIRAM VILLA", loc: "LONAVALA", priceWd: "44000", priceWe: "88000", img: "public/villa/697c8a1f8005e.jpg" },
+            { id: "81", bhk: 12, title: "12 BHK SINGARA VILLA", loc: "KARJAT", priceWd: "44000", priceWe: "88000", img: "public/villa/697c899008fce.jpg" },
+            { id: "80", bhk: 10, title: "10 BHK CASA DE KRI", loc: "KARJAT", priceWd: "32000", priceWe: "60000", img: "public/villa/697c8783af0f6.jpg" },
             { id: "79", bhk: 10, title: "10 BHK PARIS VILLA", loc: "LONAVALA", priceWd: "32000", priceWe: "60000", img: "public/villa/697c8573922ef.jpg" },
-
-            // 12 BHK
-            { id: "82", bhk: 12, title: "12 BHK ANJIRAM VILLA", loc: "LONAVALA", priceWd: "44000", priceWe: "88000", img: "public/villa/69c3f99b56ef9.jpg" },
-            { id: "81", bhk: 12, title: "12 BHK SINGARA VILLA", loc: "KARJAT", priceWd: "44000", priceWe: "88000", img: "public/villa/69d518437cf8f.jpg" }
+            { id: "78", bhk: 8, title: "8 BHK MAHABIR VILLA", loc: "KARJAT", priceWd: "28000", priceWe: "48000", img: "public/villa/697c849087150.jpg" },
+            { id: "77", bhk: 8, title: "8 BHK HILLJILL VILLA", loc: "IGATPURI", priceWd: "22000", priceWe: "42000", img: "public/villa/697c7db6c1f85.jpg" },
+            { id: "76", bhk: 8, title: "8 BHK HIRRO VILLA", loc: "ALIBAUG", priceWd: "22000", priceWe: "42000", img: "public/villa/697c7cac43a32.jpg" },
+            { id: "75", bhk: 8, title: "8 BHK APRIT VILLA", loc: "LONAVALA", priceWd: "35000", priceWe: "58000", img: "public/villa/697c6e9ce2698.jpg" },
+            { id: "74", bhk: 7, title: "7 BHK JIWA VILLA", loc: "ALIBAUG", priceWd: "20000", priceWe: "32000", img: "public/villa/697c588db0c45.jpg" },
+            { id: "73", bhk: 7, title: "7 BHK HARSI VILLA", loc: "LONAVALA", priceWd: "28000", priceWe: "48000", img: "public/villa/697c57abebfea.jpg" },
+            { id: "72", bhk: 7, title: "7 BHK BUDDHA VIHAR", loc: "KARJAT", priceWd: "28000", priceWe: "48000", img: "public/villa/697c5700e2dfa.jpg" },
+            { id: "71", bhk: 7, title: "7 BHK LUXURY HUT VILLA", loc: "KARJAT", priceWd: "52000", priceWe: "90000", img: "public/villa/697c55c2f328c.jpg" },
+            { id: "70", bhk: 7, title: "7 BHK IGRI HORA TURF VILLA", loc: "IGATPURI", priceWd: "19500", priceWe: "39500", img: "public/villa/697c54c753425.jpg" },
+            { id: "69", bhk: 6, title: "6 BHK PERCHE OFFGRID", loc: "PAWNA", priceWd: "23000", priceWe: "39000", img: "public/villa/697c526dd09bb.jpg" },
+            { id: "68", bhk: 6, title: "6 BHK BHUBTARA", loc: "LONAVALA", priceWd: "22000", priceWe: "39000", img: "public/villa/697c519257801.jpg" },
+            { id: "67", bhk: 6, title: "6 BHK LAKDAWALA BUNGALOW", loc: "LONAVALA", priceWd: "20000", priceWe: "38000", img: "public/villa/697c5065ed6e0.jpg" },
+            { id: "66", bhk: 6, title: "6 BHK HOUSEN VILLA", loc: "LONAVALA", priceWd: "19500", priceWe: "28000", img: "public/villa/697c4f67a9915.jpg" },
+            { id: "65", bhk: 6, title: "6 BHK BLACK STONE VILLA", loc: "LONAVALA", priceWd: "16500", priceWe: "28500", img: "public/villa/697c4e359a180.jpg" },
+            { id: "64", bhk: 5, title: "5 BHK BREEZA BAND", loc: "KARJAT", priceWd: "17000", priceWe: "24000", img: "public/villa/697b3c3b637f8.jpg" },
+            { id: "63", bhk: 5, title: "5 BHK EKAYA FARMS", loc: "PAWNA", priceWd: "16000", priceWe: "23000", img: "public/villa/697b3a32477f4.jpg" },
+            { id: "62", bhk: 5, title: "5 BHK SEWAKET VILLA", loc: "ALIBAUG", priceWd: "14000", priceWe: "22000", img: "public/villa/697b397f32837.jpg" },
+            { id: "61", bhk: 5, title: "5 BHK SOMNA VILLA", loc: "ALIBAUG", priceWd: "14000", priceWe: "22000", img: "public/villa/697b38d76f70f.jpg" },
+            { id: "60", bhk: 5, title: "5 BHK DOLCEVITA", loc: "LONAVALA", priceWd: "16000", priceWe: "26000", img: "public/villa/697b370a0659e.jpg" },
+            { id: "59", bhk: 5, title: "5 BHK BAMBLE VILLA", loc: "IGATPURI", priceWd: "15000", priceWe: "23000", img: "public/villa/697b364258b93.jpg" },
+            { id: "58", bhk: 5, title: "5 BHK LIGO VILLA", loc: "KARJAT", priceWd: "13000", priceWe: "25000", img: "public/villa/697b3549bea7c.jpg" },
+            { id: "57", bhk: 5, title: "5 BHK MARHABA VILLA", loc: "MAHABLESHWAR", priceWd: "18000", priceWe: "28000", img: "public/villa/697b3364d2dad.jpg" },
+            { id: "56", bhk: 5, title: "5 BHK KAMISAT VILLA", loc: "LONAVALA", priceWd: "13000", priceWe: "25000", img: "public/villa/697b31695e96a.jpg" },
+            { id: "55", bhk: 5, title: "5 BHK DRIFTWOOD", loc: "PANCHGANI", priceWd: "17000", priceWe: "24000", img: "public/villa/697b2f619c928.jpg" },
+            { id: "54", bhk: 4, title: "4 BHK VIRA FARM", loc: "KARJAT", priceWd: "12000", priceWe: "24000", img: "public/villa/697b0181bedcb.jpg" },
+            { id: "53", bhk: 4, title: "4 BHK ALING MASK", loc: "ALIBAUG", priceWd: "10000", priceWe: "18000", img: "public/villa/697aff08d0f90.jpg" },
+            { id: "52", bhk: 4, title: "4 BHK DECK", loc: "PANCHGANI", priceWd: "16500", priceWe: "21000", img: "public/villa/697afe21dcca2.jpg" },
+            { id: "51", bhk: 4, title: "4 BHK BORN COTTAGE", loc: "LONAVALA", priceWd: "16000", priceWe: "21000", img: "public/villa/697afc6b2a3f2.jpg" },
+            { id: "50", bhk: 4, title: "4 BHK NOVOTEL IMAGICA", loc: "PANCHGANI", priceWd: "12000", priceWe: "18000", img: "public/villa/697af836283ef.jpg" },
+            { id: "49", bhk: 4, title: "4 BHK IGNO CASA", loc: "IGATPURI", priceWd: "9500", priceWe: "16000", img: "public/villa/697af64a63498.jpg" },
+            { id: "48", bhk: 4, title: "4 BHK CORN VILLA", loc: "ALIBAUG", priceWd: "10000", priceWe: "18000", img: "public/villa/697af5afb7a02.jpg" },
+            { id: "47", bhk: 4, title: "4 BHK PUSHKAR NALAWADE HOME", loc: "LONAVALA", priceWd: "10000", priceWe: "18000", img: "public/villa/697af4b798449.jpg" },
+            { id: "46", bhk: 4, title: "4 BHK CRAZY BELL", loc: "KARJAT", priceWd: "10000", priceWe: "18000", img: "public/villa/697af16d55677.jpg" },
+            { id: "45", bhk: 3, title: "3 BHK THE LAST RESORT", loc: "MAHABLESHWAR", priceWd: "8000", priceWe: "12000", img: "public/villa/697af073ba976.jpg" },
+            { id: "44", bhk: 3, title: "3 BHK SUNFLOWER", loc: "LONAVALA", priceWd: "9000", priceWe: "16000", img: "public/villa/697ae8f554a3c.jpg" },
+            { id: "43", bhk: 3, title: "3 BHK VIRAJ DHULE", loc: "LONAVALA", priceWd: "9000", priceWe: "16000", img: "public/villa/697ae7973df1d.jpg" },
+            { id: "42", bhk: 3, title: "3 BHK THE LAKE HOUSE", loc: "LONAVALA", priceWd: "7000", priceWe: "10000", img: "public/villa/697ae6e827e19.jpg" },
+            { id: "41", bhk: 3, title: "3 BHK VILLA OASIS", loc: "KARJAT", priceWd: "8500", priceWe: "15000", img: "public/villa/697a520e2aeac.jpg" },
+            { id: "40", bhk: 3, title: "3 BHK MERITASADORE", loc: "PANCHGANI", priceWd: "9000", priceWe: "14000", img: "public/villa/697a5066be512.jpg" },
+            { id: "39", bhk: 3, title: "3 BHK CLIFF SIDEAWAY", loc: "PANCHGANI", priceWd: "9000", priceWe: "14000", img: "public/villa/697a41b37c416.jpg" },
+            { id: "35", bhk: 2, title: "2 BHK SHREE FARMS", loc: "KARJAT", priceWd: "5500", priceWe: "9500", img: "public/villa/697a3bf075454.jpg" },
+            { id: "34", bhk: 2, title: "2 BHK SMOOKEY VILLA", loc: "IGATPURI", priceWd: "5000", priceWe: "8000", img: "public/villa/697a3b2fc69ac.jpg" },
+            { id: "33", bhk: 2, title: "2 BHK ANVI VILLA", loc: "ALIBAUG", priceWd: "5000", priceWe: "9000", img: "public/villa/697a399c0250f.jpg" },
+            { id: "32", bhk: 2, title: "2 BHK ZINGO VALLEY", loc: "IGATPURI", priceWd: "5000", priceWe: "9000", img: "public/villa/697a38d170341.jpg" },
+            { id: "31", bhk: 2, title: "2 BHK DUNED DELIGHT", loc: "KARJAT", priceWd: "5500", priceWe: "9000", img: "public/villa/697a373e53595.jpg" },
+            { id: "30", bhk: 2, title: "2 BHK SAPPHIRE SEASCAPE", loc: "KHANDALA", priceWd: "5500", priceWe: "9000", img: "public/villa/697a35309d35a.jpg" },
+            { id: "28", bhk: 2, title: "2 BHK TOPICALTIDE", loc: "LONAVALA", priceWd: "5500", priceWe: "9000", img: "public/villa/697a327ac7494.jpg" },
+            { id: "27", bhk: 2, title: "2 BHK RANGILA VILLA", loc: "ALIBAUG", priceWd: "5000", priceWe: "9000", img: "public/villa/697a1c1c9079d.jpg" },
+            { id: "26", bhk: 2, title: "2 BHK AVION HOLIDAY", loc: "KARJAT", priceWd: "5000", priceWe: "9000", img: "public/villa/697a0a5e66cee.jpg" },
+            { id: "25", bhk: 1, title: "1 BEDROOM KESARI VILLA", loc: "KARJAT", priceWd: "2500", priceWe: "5500", img: "public/villa/697a078eb008d.jpg" },
+            { id: "24", bhk: 1, title: "1 BEDROOM HIWARE VILLA", loc: "KARJAT", priceWd: "2500", priceWe: "5500", img: "public/villa/697a03e394a67.jpg" },
+            { id: "23", bhk: 8, title: "8 BHK SANDHU FARMS", loc: "PAWNA", priceWd: "35000", priceWe: "58000", img: "public/villa/697a00cc3e40e.jpg" },
+            { id: "22", bhk: 7, title: "7 BHK LOHKRA VILLA", loc: "LONAVALA", priceWd: "27000", priceWe: "42000", img: "public/villa/6979ff85760e7.jpg" },
+            { id: "21", bhk: 6, title: "6 BHK MASK STONE", loc: "KARJAT", priceWd: "24000", priceWe: "42000", img: "public/villa/6979fe54a5927.jpg" },
+            { id: "20", bhk: 5, title: "5 BHK BATCOMB", loc: "KARJAT", priceWd: "18500", priceWe: "28000", img: "public/villa/6979fd05365d7.jpg" },
+            { id: "19", bhk: 4, title: "4 BHK EARTH FARM", loc: "PAWNA", priceWd: "15000", priceWe: "22000", img: "public/villa/6979fba445ba6.jpg" },
+            { id: "18", bhk: 3, title: "3 BHK PRINCESS VILLA", loc: "PAWNA", priceWd: "12000", priceWe: "18000", img: "public/villa/6979f8d3a3176.jpg" },
+            { id: "17", bhk: 2, title: "2 BHK ROYAL CRYSTAL", loc: "LONAVALA", priceWd: "5500", priceWe: "9500", img: "public/villa/6979c0254b020.jpg" },
+            { id: "16", bhk: 1, title: "1 BEDROOM SOMNA CASA", loc: "KARJAT", priceWd: "3000", priceWe: "6000", img: "public/villa/697c4c67e9ff3.jpg" }
         ];
+
+        // Global Variables for the Gallery
+        let activeGalleryImages = [];
+        let currentImageIndex = 0;
 
         // Logic to extract ID from URL and display the right villa
         const urlParams = new URLSearchParams(window.location.search);
         const villaId = urlParams.get('id');
         const mainContent = document.getElementById('villa-content');
+        const modalMainImage = document.getElementById('modalMainImage');
+        const galleryModal = document.getElementById('galleryModal');
+        const galleryCount = document.getElementById('galleryCount');
 
-        // Find the matching villa from the database
         const currentVilla = villas.find(v => v.id === villaId);
 
         if(currentVilla) {
             
+            // Build the gallery array. Use provided gallery if exists, otherwise generate high-quality fallbacks.
+            // (You can later update the 'villas' array above to include actual 'gallery' links for every villa).
+            activeGalleryImages = currentVilla.gallery || [
+                currentVilla.img, // The main thumbnail always goes first
+                "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+            ];
+
             let specialOfferBadge = currentVilla.isPerPersonOffer ? `
                 <div class="bg-yellow-500/10 border border-yellow-500/30 text-yellow-500 p-4 rounded-xl mb-6">
                     <h3 class="font-bold tracking-widest uppercase text-xs mb-1"><i class="fa-solid fa-gift mr-2"></i> Special Group Package</h3>
@@ -176,27 +214,52 @@
                 : `<div class="text-3xl font-extrabold text-[#d4af37]">₹${parseFloat(currentVilla.priceWd).toLocaleString('en-IN')}<span class="text-sm text-gray-400 font-normal"> / weekday</span></div>
                    <div class="text-lg font-semibold text-white mt-1">₹${parseFloat(currentVilla.priceWe).toLocaleString('en-IN')}<span class="text-xs text-gray-400 font-normal"> / weekend</span></div>`;
 
-            // Default description
             const fallbackDesc = "Experience unparalleled luxury in this exquisite property. Featuring modern amenities, spacious interiors, and breathtaking surroundings, it is the perfect sanctuary for your family or friends.";
             
-            // Build the HTML for the page
             mainContent.innerHTML = `
-                <!-- Image Header -->
-                <div class="w-full h-[50vh] md:h-[70vh] relative">
-                    <img src="${currentVilla.img}" onerror="this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920'" alt="${currentVilla.title}" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/40 to-transparent"></div>
-                    
-                    <div class="absolute bottom-0 left-0 w-full p-6 md:p-12 max-w-7xl mx-auto">
-                        <div class="inline-block bg-[#d4af37]/20 border border-[#d4af37]/50 text-[#d4af37] px-4 py-1 rounded text-xs font-bold tracking-widest uppercase mb-4 backdrop-blur-md">
-                            ${currentVilla.bhk} Bedroom Estate
+                
+                <!-- Title Section -->
+                <div class="max-w-7xl mx-auto px-4 pt-10 pb-4">
+                    <div class="inline-block bg-[#d4af37]/20 border border-[#d4af37]/50 text-[#d4af37] px-4 py-1 rounded text-xs font-bold tracking-widest uppercase mb-4">
+                        ${currentVilla.bhk} Bedroom Estate
+                    </div>
+                    <h1 class="serif text-4xl md:text-5xl text-white font-normal leading-tight mb-2">${currentVilla.title}</h1>
+                    <p class="text-sm text-gray-400 flex items-center gap-2"><i class="fa-solid fa-location-dot text-[#d4af37]"></i> ${currentVilla.loc}</p>
+                </div>
+
+                <!-- Modern Image Grid (Airbnb Style) -->
+                <div class="max-w-7xl mx-auto px-4 pb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-2 h-[40vh] md:h-[60vh] rounded-2xl overflow-hidden relative">
+                        
+                        <!-- Main Large Image (Left) -->
+                        <div class="md:col-span-2 md:row-span-2 h-full w-full relative group cursor-pointer" onclick="openGallery(0)">
+                            <img src="${activeGalleryImages[0]}" onerror="this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000'" class="w-full h-full object-cover group-hover:brightness-75 transition duration-300">
+                            <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition duration-300"></div>
                         </div>
-                        <h1 class="serif text-4xl md:text-6xl text-white font-normal leading-tight mb-2">${currentVilla.title}</h1>
-                        <p class="text-xl text-gray-300 flex items-center gap-2"><i class="fa-solid fa-location-dot text-[#d4af37]"></i> ${currentVilla.loc}</p>
+
+                        <!-- 4 Small Images (Right) -->
+                        <div class="hidden md:block h-full w-full relative group cursor-pointer" onclick="openGallery(1)">
+                            <img src="${activeGalleryImages[1] || activeGalleryImages[0]}" class="w-full h-full object-cover group-hover:brightness-75 transition duration-300">
+                        </div>
+                        <div class="hidden md:block h-full w-full relative group cursor-pointer" onclick="openGallery(2)">
+                            <img src="${activeGalleryImages[2] || activeGalleryImages[0]}" class="w-full h-full object-cover group-hover:brightness-75 transition duration-300">
+                        </div>
+                        <div class="hidden md:block h-full w-full relative group cursor-pointer" onclick="openGallery(3)">
+                            <img src="${activeGalleryImages[3] || activeGalleryImages[0]}" class="w-full h-full object-cover group-hover:brightness-75 transition duration-300">
+                        </div>
+                        <div class="hidden md:block h-full w-full relative group cursor-pointer" onclick="openGallery(4)">
+                            <img src="${activeGalleryImages[4] || activeGalleryImages[0]}" class="w-full h-full object-cover group-hover:brightness-75 transition duration-300">
+                        </div>
+
+                        <!-- View All Photos Button -->
+                        <button onclick="openGallery(0)" class="absolute bottom-6 right-6 bg-white text-black px-4 py-2 rounded-lg font-semibold text-sm shadow-lg hover:bg-gray-200 transition flex items-center gap-2">
+                            <i class="fa-solid fa-images"></i> Show all photos
+                        </button>
                     </div>
                 </div>
 
                 <!-- Main Details Layout -->
-                <div class="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div class="max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-3 gap-12">
                     
                     <!-- Left Column: Info & Amenities -->
                     <div class="lg:col-span-2 space-y-12">
@@ -257,7 +320,6 @@
                 </div>
             `;
         } else {
-            // Error handling if ID is missing or wrong
             mainContent.innerHTML = `
                 <div class="flex flex-col items-center justify-center h-[60vh] text-center px-4">
                     <i class="fa-solid fa-house-chimney-crack text-6xl text-gray-700 mb-6"></i>
@@ -267,6 +329,53 @@
                 </div>
             `;
         }
+
+        // ================= GALLERY LOGIC =================
+        
+        function openGallery(index = 0) {
+            currentImageIndex = index;
+            updateModalImage();
+            galleryModal.classList.remove('hidden');
+            galleryModal.classList.add('flex');
+            document.body.style.overflow = 'hidden'; // Stop background scrolling
+        }
+
+        function closeGallery() {
+            galleryModal.classList.add('hidden');
+            galleryModal.classList.remove('flex');
+            document.body.style.overflow = 'auto'; // Restore background scrolling
+        }
+
+        function changeImage(step) {
+            currentImageIndex += step;
+            // Loop back to start/end
+            if (currentImageIndex >= activeGalleryImages.length) {
+                currentImageIndex = 0;
+            } else if (currentImageIndex < 0) {
+                currentImageIndex = activeGalleryImages.length - 1;
+            }
+            updateModalImage();
+        }
+
+        function updateModalImage() {
+            // Add a small fade effect
+            modalMainImage.style.opacity = 0;
+            setTimeout(() => {
+                modalMainImage.src = activeGalleryImages[currentImageIndex];
+                galleryCount.innerText = `${currentImageIndex + 1} / ${activeGalleryImages.length}`;
+                modalMainImage.style.opacity = 1;
+            }, 150);
+        }
+
+        // Keyboard controls for gallery
+        document.addEventListener('keydown', (e) => {
+            if (!galleryModal.classList.contains('hidden')) {
+                if (e.key === 'ArrowRight') changeImage(1);
+                if (e.key === 'ArrowLeft') changeImage(-1);
+                if (e.key === 'Escape') closeGallery();
+            }
+        });
+
     </script>
 </body>
 </html>
