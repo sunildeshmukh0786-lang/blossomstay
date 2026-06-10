@@ -91,23 +91,10 @@
     </footer>
 
     <script>
-        // FULL VILLA DATABASE
         const villas = [
-            // Example of a fully populated gallery (Glass House ID 87)
-            { 
-                id: "87", bhk: 6, title: "6 BHK GLASS HOUSE", loc: "PAWNA / LONAVALA", priceWd: "22000", priceWe: "39000", img: "public/villa/698ef60bc9d5e.jpg", isPerPersonOffer: true, ppPrice: "1499", desc: "Includes All Meals (Proper Jain Food available), BBQ Setup, and Extra Guest Charges! Plus, free Wi-Fi, television, swimming pool access, and more.",
-                gallery: [
-                    "public/villa/698ef60bc9d5e.jpg",
-                    "public/villa/698ef60bca45e.jpg",
-                    "public/villa/698ef60bca78f.jpg",
-                    "public/villa/698ef60bcaa6f.jpg",
-                    "public/villa/698ef60bcad73.jpg",
-                    "public/villa/698ef60bcb090.jpg",
-                    "public/villa/698ef60bcb62b.jpg"
-                ]
-            },
             { id: "89", bhk: 5, title: "5 BHK DREAMWOOD VILLA", loc: "PAWNA / LONAVALA", priceWd: "18000", priceWe: "28000", img: "public/villa/69c3f8de08ca0.jpg" },
             { id: "88", bhk: 6, title: "6 BHK DUBASH FARM", loc: "MAHABLESHWAR", priceWd: "20000", priceWe: "35000", img: "public/villa/69c3f8c083d18.jpg" },
+            { id: "87", bhk: 6, title: "6 BHK GLASS HOUSE", loc: "PAWNA / LONAVALA", priceWd: "22000", priceWe: "39000", img: "public/villa/698ef60bc9d5e.jpg", isPerPersonOffer: true, ppPrice: "1499", desc: "Includes All Meals (Proper Jain Food available), BBQ Setup, and Extra Guest Charges! Plus, free Wi-Fi, television, swimming pool access, and more." },
             { id: "85", bhk: 5, title: "5 BHK VILAS SAKHARAM WAGHMARE", loc: "LONAVALA", priceWd: "25000", priceWe: "35000", img: "public/villa/698e3b6a8029a.webp", isPerPersonOffer: true, ppPrice: "1400", desc: "Includes BBQ Setup, free Wi-Fi, television, swimming pool access, and more. Delicious meals available as an add-on." },
             { id: "84", bhk: 3, title: "3 BHK THAKWAD NIWAS", loc: "KARJAT", priceWd: "9000", priceWe: "15000", img: "public/villa/697f49a5e9ed6.jpg" },
             { id: "83", bhk: 7, title: "7 BHK THE WHITE HELL", loc: "KARJAT", priceWd: "28000", priceWe: "42000", img: "public/villa/697c8bd128f54.jpg" },
@@ -180,7 +167,6 @@
         let activeGalleryImages = [];
         let currentImageIndex = 0;
 
-        // Logic to extract ID from URL and display the right villa
         const urlParams = new URLSearchParams(window.location.search);
         const villaId = urlParams.get('id');
         const mainContent = document.getElementById('villa-content');
@@ -190,41 +176,91 @@
 
         const currentVilla = villas.find(v => v.id === villaId);
 
-        if(currentVilla) {
-            
-            // Build the gallery array. Use provided gallery if exists, otherwise generate high-quality fallbacks.
-            // (You can later update the 'villas' array above to include actual 'gallery' links for every villa).
-            activeGalleryImages = currentVilla.gallery || [
-                currentVilla.img, // The main thumbnail always goes first
-                "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-            ];
+        async function loadVillaData() {
+            if (!currentVilla) {
+                renderNotFoundError();
+                return;
+            }
 
-            let specialOfferBadge = currentVilla.isPerPersonOffer ? `
+            // Standard fallback gallery images (always start with the main thumbnail)
+            let galleryImages = [currentVilla.img];
+            let descriptionHTML = "";
+
+            try {
+                // Fetch the old static page to automatically extract actual gallery images & description!
+                const response = await fetch(`villa-detail/${villaId}.html`);
+                if (response.ok) {
+                    const htmlText = await response.text();
+                    const doc = new DOMParser().parseFromString(htmlText, 'text/html');
+
+                    // Extract all slider image paths from original HTTrack structure
+                    const extractedImgLinks = Array.from(doc.querySelectorAll('a[href*="public/villa/"]'))
+                        .map(a => a.getAttribute('href').replace(/^\.\.\//, ''));
+
+                    const extractedImgTags = Array.from(doc.querySelectorAll('img[src*="public/villa/"]'))
+                        .map(img => img.getAttribute('src').replace(/^\.\.\//, ''));
+
+                    const combinedPaths = [...extractedImgLinks, ...extractedImgTags];
+                    const uniquePaths = [...new Set(combinedPaths)].filter(p => p && p.trim() !== "");
+
+                    if (uniquePaths.length > 0) {
+                        galleryImages = uniquePaths;
+                    }
+
+                    // Extract actual detailed description HTML from raw document
+                    const rawDescContainer = doc.querySelector('.villa-full-description');
+                    if (rawDescContainer) {
+                        descriptionHTML = rawDescContainer.innerHTML;
+                    } else {
+                        // Fallback: collect paragraphs
+                        const paras = Array.from(doc.querySelectorAll('p'))
+                            .map(p => p.outerHTML)
+                            .join('');
+                        if (paras && paras.trim() !== "") {
+                            descriptionHTML = paras;
+                        }
+                    }
+                }
+            } catch (err) {
+                console.error("Error dynamically loading original assets:", err);
+            }
+
+            activeGalleryImages = galleryImages;
+
+            const fallbackDesc = "Experience unparalleled luxury in this exquisite property. Featuring modern amenities, spacious interiors, and breathtaking surroundings, it is the perfect sanctuary for your family or friends.";
+            const finalDesc = (descriptionHTML && descriptionHTML.trim() !== "") ? descriptionHTML : `<p class="text-gray-300">${fallbackDesc}</p>`;
+
+            renderPage(currentVilla, galleryImages, finalDesc);
+        }
+
+        function renderPage(villa, images, description) {
+            let specialOfferBadge = villa.isPerPersonOffer ? `
                 <div class="bg-yellow-500/10 border border-yellow-500/30 text-yellow-500 p-4 rounded-xl mb-6">
                     <h3 class="font-bold tracking-widest uppercase text-xs mb-1"><i class="fa-solid fa-gift mr-2"></i> Special Group Package</h3>
-                    <p class="text-sm">Rate displayed is per person. Minimum group sizes apply. ${currentVilla.desc || ''}</p>
+                    <p class="text-sm">Rate displayed is per person. Minimum group sizes apply. ${villa.desc || ''}</p>
                 </div>
             ` : '';
 
-            let priceDisplay = currentVilla.isPerPersonOffer 
-                ? `<div class="text-3xl font-extrabold text-[#d4af37]">₹${parseFloat(currentVilla.ppPrice).toLocaleString('en-IN')}<span class="text-sm text-gray-400 font-normal"> / per person</span></div>`
-                : `<div class="text-3xl font-extrabold text-[#d4af37]">₹${parseFloat(currentVilla.priceWd).toLocaleString('en-IN')}<span class="text-sm text-gray-400 font-normal"> / weekday</span></div>
-                   <div class="text-lg font-semibold text-white mt-1">₹${parseFloat(currentVilla.priceWe).toLocaleString('en-IN')}<span class="text-xs text-gray-400 font-normal"> / weekend</span></div>`;
+            let priceDisplay = villa.isPerPersonOffer 
+                ? `<div class="text-3xl font-extrabold text-[#d4af37]">₹${parseFloat(villa.ppPrice).toLocaleString('en-IN')}<span class="text-sm text-gray-400 font-normal"> / per person</span></div>`
+                : `<div class="text-3xl font-extrabold text-[#d4af37]">₹${parseFloat(villa.priceWd).toLocaleString('en-IN')}<span class="text-sm text-gray-400 font-normal"> / weekday</span></div>
+                   <div class="text-lg font-semibold text-white mt-1">₹${parseFloat(villa.priceWe).toLocaleString('en-IN')}<span class="text-xs text-gray-400 font-normal"> / weekend</span></div>`;
 
-            const fallbackDesc = "Experience unparalleled luxury in this exquisite property. Featuring modern amenities, spacious interiors, and breathtaking surroundings, it is the perfect sanctuary for your family or friends.";
-            
+            // Build photo layout (Airbnb styled)
+            const mainPhoto = images[0] || villa.img;
+            const subPhoto1 = images[1] || mainPhoto;
+            const subPhoto2 = images[2] || mainPhoto;
+            const subPhoto3 = images[3] || mainPhoto;
+            const subPhoto4 = images[4] || mainPhoto;
+
             mainContent.innerHTML = `
-                
                 <!-- Title Section -->
                 <div class="max-w-7xl mx-auto px-4 pt-10 pb-4">
                     <div class="inline-block bg-[#d4af37]/20 border border-[#d4af37]/50 text-[#d4af37] px-4 py-1 rounded text-xs font-bold tracking-widest uppercase mb-4">
-                        ${currentVilla.bhk} Bedroom Estate
+                        ${villa.bhk} Bedroom Estate
                     </div>
-                    <h1 class="serif text-4xl md:text-5xl text-white font-normal leading-tight mb-2">${currentVilla.title}</h1>
-                    <p class="text-sm text-gray-400 flex items-center gap-2"><i class="fa-solid fa-location-dot text-[#d4af37]"></i> ${currentVilla.loc}</p>
+                    <h1 class="serif text-4xl md:text-5xl text-white font-normal leading-tight mb-2">${villa.title}</h1>
+                    <p class="text-sm text-gray-400 flex items-center gap-2"><i class="fa-solid fa-location-dot text-[#d4af37]"></i> ${villa.loc}</p>
                 </div>
 
                 <!-- Modern Image Grid (Airbnb Style) -->
@@ -233,22 +269,22 @@
                         
                         <!-- Main Large Image (Left) -->
                         <div class="md:col-span-2 md:row-span-2 h-full w-full relative group cursor-pointer" onclick="openGallery(0)">
-                            <img src="${activeGalleryImages[0]}" onerror="this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000'" class="w-full h-full object-cover group-hover:brightness-75 transition duration-300">
+                            <img src="${mainPhoto}" onerror="this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000'" class="w-full h-full object-cover group-hover:brightness-75 transition duration-300">
                             <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition duration-300"></div>
                         </div>
 
                         <!-- 4 Small Images (Right) -->
                         <div class="hidden md:block h-full w-full relative group cursor-pointer" onclick="openGallery(1)">
-                            <img src="${activeGalleryImages[1] || activeGalleryImages[0]}" class="w-full h-full object-cover group-hover:brightness-75 transition duration-300">
+                            <img src="${subPhoto1}" class="w-full h-full object-cover group-hover:brightness-75 transition duration-300">
                         </div>
                         <div class="hidden md:block h-full w-full relative group cursor-pointer" onclick="openGallery(2)">
-                            <img src="${activeGalleryImages[2] || activeGalleryImages[0]}" class="w-full h-full object-cover group-hover:brightness-75 transition duration-300">
+                            <img src="${subPhoto2}" class="w-full h-full object-cover group-hover:brightness-75 transition duration-300">
                         </div>
                         <div class="hidden md:block h-full w-full relative group cursor-pointer" onclick="openGallery(3)">
-                            <img src="${activeGalleryImages[3] || activeGalleryImages[0]}" class="w-full h-full object-cover group-hover:brightness-75 transition duration-300">
+                            <img src="${subPhoto3}" class="w-full h-full object-cover group-hover:brightness-75 transition duration-300">
                         </div>
                         <div class="hidden md:block h-full w-full relative group cursor-pointer" onclick="openGallery(4)">
-                            <img src="${activeGalleryImages[4] || activeGalleryImages[0]}" class="w-full h-full object-cover group-hover:brightness-75 transition duration-300">
+                            <img src="${subPhoto4}" class="w-full h-full object-cover group-hover:brightness-75 transition duration-300">
                         </div>
 
                         <!-- View All Photos Button -->
@@ -268,7 +304,7 @@
 
                         <div>
                             <h3 class="serif text-2xl text-[#d4af37] mb-4 border-b border-gray-800 pb-2">About The Property</h3>
-                            <p class="text-gray-300 leading-relaxed">${currentVilla.desc || fallbackDesc}</p>
+                            <div class="text-gray-300 leading-relaxed font-body space-y-4">${description}</div>
                         </div>
 
                         <div>
@@ -296,7 +332,7 @@
                         </div>
                     </div>
 
-                    <!-- Right Column: Sticky Booking Card -->
+                    <!-- Right Column: Booking Card -->
                     <div class="lg:col-span-1 relative">
                         <div class="glass-card rounded-2xl p-6 md:p-8 sticky top-32 shadow-2xl">
                             <div class="border-b border-gray-700 pb-6 mb-6">
@@ -305,7 +341,7 @@
                             
                             <p class="text-xs text-gray-400 mb-6 text-center italic">To secure this property or inquire about availability, contact our concierge directly.</p>
                             
-                            <a href="https://wa.me/918806200139?text=Hello Blossom Stay! I am interested in booking the ${currentVilla.title}." target="_blank" 
+                            <a href="https://wa.me/918806200139?text=Hello Blossom Stay! I am interested in booking the ${villa.title}." target="_blank" 
                                class="block w-full bg-[#25D366] hover:bg-[#1ebe5d] text-white text-center font-bold py-4 rounded-lg transition duration-300 shadow-lg mb-4 flex items-center justify-center gap-3">
                                 <i class="fa-brands fa-whatsapp text-2xl"></i> Chat on WhatsApp
                             </a>
@@ -319,7 +355,9 @@
 
                 </div>
             `;
-        } else {
+        }
+
+        function renderNotFoundError() {
             mainContent.innerHTML = `
                 <div class="flex flex-col items-center justify-center h-[60vh] text-center px-4">
                     <i class="fa-solid fa-house-chimney-crack text-6xl text-gray-700 mb-6"></i>
@@ -337,18 +375,17 @@
             updateModalImage();
             galleryModal.classList.remove('hidden');
             galleryModal.classList.add('flex');
-            document.body.style.overflow = 'hidden'; // Stop background scrolling
+            document.body.style.overflow = 'hidden'; 
         }
 
         function closeGallery() {
             galleryModal.classList.add('hidden');
             galleryModal.classList.remove('flex');
-            document.body.style.overflow = 'auto'; // Restore background scrolling
+            document.body.style.overflow = 'auto'; 
         }
 
         function changeImage(step) {
             currentImageIndex += step;
-            // Loop back to start/end
             if (currentImageIndex >= activeGalleryImages.length) {
                 currentImageIndex = 0;
             } else if (currentImageIndex < 0) {
@@ -358,7 +395,6 @@
         }
 
         function updateModalImage() {
-            // Add a small fade effect
             modalMainImage.style.opacity = 0;
             setTimeout(() => {
                 modalMainImage.src = activeGalleryImages[currentImageIndex];
@@ -376,6 +412,10 @@
             }
         });
 
+        // Trigger dynamic loader on window launch!
+        window.onload = function() {
+            loadVillaData();
+        }
     </script>
 </body>
 </html>
