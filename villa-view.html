@@ -24,10 +24,6 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
         
-        /* Hide scrollbar for gallery thumbnails */
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
         /* Custom scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #1a1a1a; }
@@ -71,8 +67,10 @@
         </div>
     </main>
 
-    <!-- FULLSCREEN IMAGE GALLERY MODAL -->
-    <div id="galleryModal" class="fixed inset-0 bg-black/98 z-50 hidden flex-col">
+    <!-- ============================================================ -->
+    <!-- FULLSCREEN IMAGE GALLERY MODAL – WITH BLUR BACKGROUND         -->
+    <!-- ============================================================ -->
+    <div id="galleryModal" class="fixed inset-0 bg-black/80 backdrop-blur-xl z-50 hidden flex-col">
         <div class="flex justify-between items-center p-6 text-white absolute top-0 w-full z-10 bg-gradient-to-b from-black/50 to-transparent">
             <div class="text-sm font-semibold tracking-widest uppercase" id="galleryCount">1 / 5</div>
             <button onclick="closeGallery()" class="text-gray-400 hover:text-white text-3xl transition transform hover:scale-110">
@@ -302,10 +300,10 @@
             const mainPhoto = images[0] || villa.img;
 
             // ============================================================
-            // 🔥 NEW SINGLE-IMAGE GALLERY – NO OVERLAP, NO GLITCH
+            // SINGLE-IMAGE PREVIEW – CLEAN & RESPONSIVE
             // ============================================================
             const galleryHTML = `
-                <!-- Gallery - Single Image Preview (CLEAN) -->
+                <!-- Gallery - Single Image Preview -->
                 <div class="max-w-7xl mx-auto px-4 pb-10 animate-fade-in" style="animation-delay: 0.1s">
                     <div class="w-full rounded-2xl overflow-hidden relative group cursor-pointer bg-[#0a0a0a] shadow-2xl border border-gray-800" 
                          onclick="openGallery(0)" 
