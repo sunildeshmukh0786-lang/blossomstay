@@ -36,6 +36,10 @@
             to { opacity: 1; transform: translateY(0); }
         }
         .animate-fade-in { animation: fadeIn 0.6s ease-out forwards; }
+
+        /* Hide scrollbar for thumbnails */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="bg-[#111111] overflow-x-hidden">
@@ -68,7 +72,7 @@
     </main>
 
     <!-- ============================================================ -->
-    <!-- FULLSCREEN IMAGE GALLERY MODAL – WITH BLUR BACKGROUND         -->
+    <!-- FULLSCREEN IMAGE MODAL – with Blur Background                 -->
     <!-- ============================================================ -->
     <div id="galleryModal" class="fixed inset-0 bg-black/80 backdrop-blur-xl z-50 hidden flex-col">
         <div class="flex justify-between items-center p-6 text-white absolute top-0 w-full z-10 bg-gradient-to-b from-black/50 to-transparent">
@@ -300,33 +304,65 @@
             const mainPhoto = images[0] || villa.img;
 
             // ============================================================
-            // SINGLE-IMAGE PREVIEW – CLEAN & RESPONSIVE
+            // BUILD THUMBNAILS (first 3 images)
+            // ============================================================
+            const thumbImages = images.slice(0, 3);
+            let thumbsHTML = '';
+            thumbImages.forEach((img, idx) => {
+                // Escape single quotes in image path for the onclick
+                const safeImg = img.replace(/'/g, "\\'");
+                thumbsHTML += `
+                    <div onclick="event.stopPropagation(); document.getElementById('spotlightImage').src='${safeImg}'; openGallery(${idx})" 
+                         class="cursor-pointer rounded-lg overflow-hidden border-2 border-transparent hover:border-[#d4af37] transition-all duration-300 flex-shrink-0 w-28 h-20 md:w-32 md:h-24 bg-gray-900 shadow-md">
+                        <img src="${img}" onerror="this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=400'" class="w-full h-full object-cover hover:scale-105 transition duration-300" alt="Thumbnail ${idx+1}">
+                    </div>
+                `;
+            });
+
+            // If more than 3 images, show a "+N" overlay
+            if (images.length > 3) {
+                thumbsHTML += `
+                    <div onclick="openGallery(3)" 
+                         class="relative cursor-pointer rounded-lg overflow-hidden border-2 border-gray-700 hover:border-[#d4af37] transition-all duration-300 flex-shrink-0 w-28 h-20 md:w-32 md:h-24 bg-gray-900 flex items-center justify-center group shadow-md">
+                        <span class="text-white text-xs font-bold bg-black/70 px-3 py-1.5 rounded-full">+${images.length - 3}</span>
+                    </div>
+                `;
+            }
+
+            // ============================================================
+            // RENDER THE PAGE
             // ============================================================
             const galleryHTML = `
-                <!-- Gallery - Single Image Preview -->
-                <div class="max-w-7xl mx-auto px-4 pb-10 animate-fade-in" style="animation-delay: 0.1s">
+                <!-- Gallery - Spotlight + Thumbnails -->
+                <div class="max-w-7xl mx-auto px-4 pb-8 animate-fade-in">
+                    <!-- Main Spotlight Image -->
                     <div class="w-full rounded-2xl overflow-hidden relative group cursor-pointer bg-[#0a0a0a] shadow-2xl border border-gray-800" 
                          onclick="openGallery(0)" 
-                         style="height: 50vh; max-height: 600px; min-height: 300px;">
-                        
-                        <img src="${mainPhoto}" 
+                         style="height: 50vh; max-height: 550px; min-height: 300px;">
+                        <img id="spotlightImage" src="${mainPhoto}" 
                              onerror="this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000'" 
-                             class="w-full h-full object-cover transition duration-700 group-hover:scale-105" 
+                             class="w-full h-full object-cover transition duration-500" 
                              alt="${villa.title}">
                         
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
+                        
+                        <div class="absolute top-6 left-6 bg-black/70 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/10">
+                            <span class="text-[#d4af37] text-xs font-bold tracking-widest uppercase">${villa.bhk} BHK</span>
+                            <span class="text-white text-[10px] font-medium ml-2 opacity-70">• Entire Villa</span>
+                        </div>
                         
                         <button onclick="event.stopPropagation(); openGallery(0)" 
                                 class="absolute bottom-6 right-6 bg-black/80 backdrop-blur-sm text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow-lg hover:bg-[#d4af37] hover:text-black transition-all duration-300 flex items-center gap-2 border border-white/20 group/btn">
                             <i class="fa-regular fa-images group-hover/btn:scale-110 transition"></i> 
                             View All (${images.length})
                         </button>
-                        
-                        <div class="absolute top-6 left-6 bg-black/70 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/10">
-                            <span class="text-[#d4af37] text-xs font-bold tracking-widest uppercase">${villa.bhk} BHK</span>
-                            <span class="text-white text-[10px] font-medium ml-2 opacity-70">• Entire Villa</span>
-                        </div>
                     </div>
+
+                    <!-- Thumbnail Row (2-3 visible + extra count) -->
+                    <div class="flex gap-3 mt-4 overflow-x-auto no-scrollbar pb-2">
+                        ${thumbsHTML}
+                    </div>
+                    <p class="text-gray-500 text-[10px] uppercase tracking-widest mt-2">Click any thumbnail to preview in spotlight</p>
                 </div>
             `;
 
